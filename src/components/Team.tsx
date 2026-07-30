@@ -1,226 +1,96 @@
 'use client'
 
-import React, { useState } from 'react'
-import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
-import {
-  Users,
-  Award,
-  ChevronDown,
-  ChevronUp,
-  Globe,
-  Building2,
-  Briefcase
-} from 'lucide-react'
-import { brand, leadershipGroups, brandMedia } from '@/lib/brand'
-
-interface TeamMember {
-  name: string
-  role: string
-  image?: string
-  bio: string
-}
-
-interface TeamGroup {
-  title: string
-  icon: any
-  members: TeamMember[]
-}
+import React from 'react'
+import { motion } from 'framer-motion'
+import { HardHat, Compass, Briefcase, Mail } from 'lucide-react'
+import { teamMembers } from '@/lib/brand'
 
 const Team = () => {
-  const [expandedGroup, setExpandedGroup] = useState<string | null>('Executive Leadership')
-  const [expandedMember, setExpandedMember] = useState<string | null>(null)
-
-  const founder: TeamMember = {
-    name: brand.founderName,
-    role: brand.founderTitle,
-    image: brandMedia.founder.portrait,
-    bio: 'Our founder built Ker & Co. Business Group from a humble 1997 import business into a diversified Ethiopian portfolio spanning distribution, paper products, hospitality, wellness, real estate, mining, agriculture, and export ventures.'
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
   }
 
-  const teamGroups: TeamGroup[] = leadershipGroups.map((group, index) => ({
-    title: group.title,
-    icon: [Award, Briefcase, Building2, Globe][index],
-    members: group.members.map((member) => ({
-      name: member.name,
-      role: member.role,
-      bio: member.bio,
-    })),
-  }))
-
-  const stats = [
-    { icon: Users, value: '1997', label: 'Founder Start' },
-    { icon: Globe, value: '4', label: 'Ker Fitness Sites' },
-    { icon: Building2, value: '4', label: 'Luxury Towers' },
-    { icon: Award, value: '3', label: 'Hotel Awards' },
-  ]
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  }
 
   return (
-    <section id="team" className="py-10 md:py-20 bg-[#F8F4EF]">
+    <section id="careers" className="py-20 md:py-32 bg-[#F9FAFB] border-t border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85, y: 50 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-8 md:mb-16"
-        >
-          <h2 className="text-2xl md:text-5xl font-bold font-heading mb-3 md:mb-6 text-black">
-            Our <span className="text-black">Leadership</span>
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
+          <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#D71920]">
+            Our Experts
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-heading text-black mt-2 leading-tight">
+            Meet the Structural Engineering Team
           </h2>
-          <p className="text-xs md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Meet the founder-led leadership structure guiding Ker & Co. Business Group across its diversified ventures and long-term growth strategy.
+          <p className="text-sm text-gray-500 max-w-xl mx-auto mt-4 leading-relaxed font-light">
+            Dedicated professionals applying advanced analysis, code compliance, and structural optimization to shape secure foundations.
           </p>
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6 mb-8 md:mb-16"
-        >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="text-center p-2.5 md:p-6 bg-white rounded-sm border border-[#E7DED2] shadow-sm"
-            >
-              <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-sm bg-[#C9A46A] mb-1.5 md:mb-3 shadow-sm">
-                <stat.icon className="w-4 h-4 md:w-6 md:h-6 text-white" />
-              </div>
-              <div className="text-base md:text-2xl font-bold text-gray-900">{stat.value}</div>
-              <div className="text-xs md:text-sm text-gray-600">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Founder */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-10"
-        >
-          <div className="bg-white rounded-sm border border-[#E7DED2] shadow-md overflow-hidden">
-            <div className="p-3 md:p-8 flex flex-row items-center gap-3 md:gap-10">
-              <div className="relative w-20 h-28 md:w-48 md:h-64 rounded-sm md:rounded-sm overflow-hidden shadow-xl flex-shrink-0">
-                <Image
-                  src={founder.image!}
-                  alt={founder.name}
-                  fill
-                  className="object-contain bg-white p-3"
-                  unoptimized
-                />
-              </div>
-              <div className="text-left">
-                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 md:px-3 md:py-1 rounded-sm bg-[#C9A46A]/15 text-[#C9A46A] text-[9px] md:text-xs font-semibold mb-1 md:mb-3">
-                  <Award className="w-3 h-3 md:w-3.5 md:h-3.5" />
-                  Founder
-                </div>
-                <h3 className="text-sm md:text-3xl font-bold text-gray-900 mb-0.5 md:mb-1">{founder.name}</h3>
-                <p className="text-[10px] md:text-base text-[#C9A46A] font-semibold mb-1 md:mb-4">{founder.role}</p>
-                <p className="text-[9px] md:text-base text-gray-600 leading-snug md:leading-relaxed max-w-2xl line-clamp-3 md:line-clamp-none">{founder.bio}</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Team Groups */}
-        <div className="space-y-4 md:space-y-8">
-          {teamGroups.map((group) => (
-            <motion.div
-              key={group.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-sm border border-[#E7DED2] shadow-md overflow-hidden"
-            >
-              <button
-                onClick={() => setExpandedGroup(expandedGroup === group.title ? null : group.title)}
-                className="w-full flex items-center justify-between p-3 md:p-6 hover:bg-gray-100 transition-colors"
-              >
-                <div className="flex items-center gap-2 md:gap-4">
-                  <div className="w-8 h-8 md:w-12 md:h-12 bg-[#C9A46A] rounded-sm flex items-center justify-center">
-                    <group.icon className="w-4 h-4 md:w-6 md:h-6 text-white" />
-                  </div>
-                  <div className="text-left">
-                    <h3 className="text-sm md:text-xl font-bold text-gray-900">{group.title}</h3>
-                    <p className="text-[10px] md:text-sm text-gray-500">{group.members.length} members</p>
-                  </div>
-                </div>
-                {expandedGroup === group.title ? (
-                  <ChevronUp className="w-5 h-5 md:w-6 md:h-6 text-gray-400" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 md:w-6 md:h-6 text-gray-400" />
-                )}
-              </button>
-
-              <AnimatePresence>
-                {expandedGroup === group.title && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="p-2.5 md:p-6 pt-0 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4 lg:gap-6">
-                      {group.members.map((member) => (
-                        <motion.div
-                          key={member.name + member.role}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          className="group"
-                        >
-                          <div
-                            className="cursor-pointer"
-                            onClick={() => setExpandedMember(expandedMember === member.name + member.role ? null : member.name + member.role)}
-                          >
-                            <div className="relative aspect-[3/4] rounded-sm md:rounded-sm overflow-hidden mb-2 md:mb-3 shadow-md group-hover:shadow-xl transition-shadow">
-                              {member.image ? (
-                                <Image
-                                  src={member.image}
-                                  alt={member.name}
-                                  fill
-                                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                                  unoptimized
-                                />
-                              ) : (
-                                <div className="w-full h-full bg-gradient-to-br from-[#C9A46A] to-[#C9A46A] flex items-center justify-center">
-                                  <Users className="w-10 h-10 text-white/60" />
-                                </div>
-                              )}
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                            </div>
-                            <h4 className="text-[9px] md:text-sm font-bold text-gray-900 leading-tight">{member.name}</h4>
-                            <p className="text-[8px] md:text-xs text-[#C9A46A] font-medium mt-0.5">{member.role}</p>
-                            <AnimatePresence>
-                              {expandedMember === member.name + member.role && (
-                                <motion.p
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: 'auto', opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  className="text-[10px] md:text-xs text-gray-600 mt-1 md:mt-2 leading-relaxed overflow-hidden"
-                                >
-                                  {member.bio}
-                                </motion.p>
-                              )}
-                            </AnimatePresence>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
         </div>
+
+        {/* Team Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
+          {teamMembers.map((member) => (
+            <motion.div
+              key={member.name}
+              variants={cardVariants}
+              className="group bg-white border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-xl hover:border-[#D71920]/20 flex flex-col h-full"
+            >
+              {/* Member Photo Container */}
+              <div className="relative aspect-[4/5] bg-gray-50 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                
+                {/* Visual Hardhat icon overlay */}
+                <div className="absolute top-4 right-4 bg-[#D71920] text-white p-2.5 shadow-md">
+                  <HardHat className="w-4 h-4" />
+                </div>
+              </div>
+
+              {/* Member Info */}
+              <div className="p-6 md:p-8 flex flex-col flex-grow justify-between gap-4">
+                <div>
+                  <h3 className="text-lg md:text-xl font-bold text-black group-hover:text-[#D71920] transition-colors leading-tight">
+                    {member.name}
+                  </h3>
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#D71920] mt-1.5">
+                    {member.role}
+                  </p>
+                  <p className="text-sm text-gray-500 mt-4 leading-relaxed font-light">
+                    {member.bio}
+                  </p>
+                </div>
+
+                {/* Footer contact placeholder */}
+                <div className="pt-4 border-t border-gray-100 flex items-center gap-3 text-gray-400">
+                  <Mail className="w-4 h-4 hover:text-[#D71920] cursor-pointer transition-colors" />
+                  <span className="text-xs">Addis Ababa Office</span>
+                </div>
+              </div>
+
+            </motion.div>
+          ))}
+        </motion.div>
+
       </div>
     </section>
   )

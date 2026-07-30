@@ -7,76 +7,76 @@
 @layer base {
   :root {
     /* Luxury corporate palette tokens */
-    --radius: 0.25rem; /* 4px rectangular shape for premium design */
+    --radius: 0px; /* Sharp rectangular design for engineering look */
     --radius-soft: var(--radius);
 
-    --background: #F8F4EF;
-    --foreground: #222222;
+    --background: #FFFFFF;
+    --foreground: #111111;
 
     --card: #FFFFFF;
-    --card-foreground: #222222;
+    --card-foreground: #111111;
 
     --popover: #FFFFFF;
-    --popover-foreground: #222222;
+    --popover-foreground: #111111;
 
-    /* Warm premium tan primary accent */
-    --primary: #C9A46A;
+    /* Kenmos Red primary accent */
+    --primary: #D71920;
     --primary-foreground: #FFFFFF;
 
     /* Secondary backgrounds / neutral accents */
-    --secondary: #F8F4EF;
-    --secondary-foreground: #222222;
+    --secondary: #F9FAFB;
+    --secondary-foreground: #111111;
 
-    --muted: #F8F4EF;
-    --muted-foreground: #666666;
+    --muted: #F3F4F6;
+    --muted-foreground: #4B5563;
 
-    --accent: #F8F4EF;
-    --accent-foreground: #222222;
+    --accent: #111111;
+    --accent-foreground: #FFFFFF;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: #E7DED2;
-    --input: #E7DED2;
-    --ring: #C9A46A; /* Tan focus ring */
+    --border: #E5E7EB;
+    --input: #E5E7EB;
+    --ring: #D71920; /* Red focus ring */
 
     /* Layout Spacing Tokens */
     --navbar-top: 0px;
-    --navbar-top-bar: 52px;
-    --navbar-height: 108px;
+    --navbar-top-bar: 0px;
+    --navbar-height: 80px;
     --navbar-gap: 0px;
     --navbar-offset: calc(var(--navbar-top) + var(--navbar-top-bar) + var(--navbar-height) + var(--navbar-gap));
   }
 
   .dark {
-    /* Keep luxury look in dark mode (still rectangular, still readable). */
-    --background: #1A1815;
-    --foreground: #FFFFFF;
+    /* Keep luxury look in dark mode */
+    --background: #0B0B0C;
+    --foreground: #F3F4F6;
 
-    --card: #252320;
-    --card-foreground: #FFFFFF;
+    --card: #121214;
+    --card-foreground: #F3F4F6;
 
-    --popover: #252320;
-    --popover-foreground: #FFFFFF;
+    --popover: #121214;
+    --popover-foreground: #F3F4F6;
 
-    --primary: #C9A46A;
+    --primary: #D71920;
     --primary-foreground: #FFFFFF;
 
-    --secondary: #2E2B27;
-    --secondary-foreground: #FFFFFF;
+    --secondary: #1F2937;
+    --secondary-foreground: #F3F4F6;
 
-    --muted: #2E2B27;
-    --muted-foreground: #B0A89F;
+    --muted: #374151;
+    --muted-foreground: #9CA3AF;
 
-    --accent: #2E2B27;
+    --accent: #D71920;
     --accent-foreground: #FFFFFF;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: #FFFFFF;
 
-    --border: #3D3934;
-    --input: #3D3934;
-    --ring: #C9A46A;
+    --border: #374151;
+    --input: #374151;
+    --ring: #D71920;
   }
 }
 
@@ -119,7 +119,7 @@
     letter-spacing: 0.01em;
   }
   a {
-    @apply text-[#C9A46A] hover:text-[#C9A46A] transition-colors duration-200;
+    @apply text-[#D71920] hover:text-red-700 transition-colors duration-200;
   }
 
   /* Premium typography defaults */
@@ -153,11 +153,7 @@
 
 @layer components {
   .gradient-bg {
-    background: linear-gradient(135deg, #222222 0%, #3d352d 48%, #C9A46A 100%);
-  }
-  
-  .medical-gradient {
-    background: linear-gradient(135deg, #C9A46A 0%, #C9A46A 100%);
+    background: linear-gradient(135deg, #111111 0%, #222222 50%, #D71920 100%);
   }
   
   .glass-effect {
@@ -167,17 +163,13 @@
   }
   
   .text-gradient {
-    color: #C9A46A;
+    color: #D71920;
   }
   
   .hero-pattern {
     background-image: 
-      radial-gradient(circle at 25% 25%, rgba(210, 180, 140, 0.22) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(34, 34, 34, 0.14) 0%, transparent 50%);
-  }
-  
-  .medical-shadow {
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      radial-gradient(circle at 25% 25%, rgba(215, 25, 32, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(17, 17, 17, 0.05) 0%, transparent 50%);
   }
   
   .hover-lift {
@@ -186,58 +178,58 @@
   
   .hover-lift:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
   }
 
-  /* Butler is the Ker & Co. brand identity typeface */
+  /* Inter/Manrope font configuration for engineering aesthetic */
   .font-heading,
   h1, h2, h3,
   .font-butler {
-    font-family: 'Butler', 'Poppins', Georgia, 'Times New Roman', serif;
+    font-family: var(--font-manrope), 'Manrope', sans-serif;
   }
 
   .text-gradient-gold {
-    background: linear-gradient(120deg, #ecd8bb 0%, #C9A46A 45%, #C9A46A 100%);
+    background: linear-gradient(120deg, #ff4d4d 0%, #D71920 60%, #990000 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .shimmer-line {
-    background: linear-gradient(90deg, transparent, rgba(210, 180, 140, 0.85), transparent);
+    background: linear-gradient(90deg, transparent, rgba(215, 25, 32, 0.8), transparent);
   }
 
   /* Luxury corporate design token utilities */
   .luxury-card {
-    @apply bg-white border border-[#E7DED2] rounded-sm shadow-md transition-all duration-300 hover:shadow-lg;
+    @apply bg-white border border-[#E5E7EB] rounded-none shadow-sm transition-all duration-300 hover:shadow-md;
   }
 
   .luxury-input {
-    @apply w-full px-4 py-3 text-sm border border-[#E7DED2] rounded-sm bg-white text-[#222222] transition-all duration-200 shadow-sm;
-    @apply focus:outline-none focus:ring-2 focus:ring-[#C9A46A]/25 focus:border-[#C9A46A] placeholder-[#7A7169];
+    @apply w-full px-4 py-3 text-sm border border-[#E5E7EB] rounded-none bg-white text-[#111111] transition-all duration-200 shadow-sm;
+    @apply focus:outline-none focus:ring-2 focus:ring-[#D71920]/25 focus:border-[#D71920] placeholder-gray-400;
   }
 
   .luxury-btn {
-    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-sm transition-all duration-200 shadow-sm hover:shadow-md active:scale-98;
-    @apply bg-[#C9A46A] text-white hover:bg-[#C9A46A];
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-none transition-all duration-200 shadow-sm hover:shadow-md active:scale-98;
+    @apply bg-[#D71920] text-white hover:bg-[#be1218];
   }
 
   .luxury-btn-outline {
-    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-sm transition-all duration-200 border border-[#C9A46A] text-[#C9A46A] bg-transparent hover:bg-[#F8F4EF];
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-none transition-all duration-200 border border-[#D71920] text-[#D71920] bg-transparent hover:bg-red-50;
   }
 
   .luxury-btn-dark {
-    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-sm transition-all duration-200 shadow-sm hover:shadow-md active:scale-98;
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-none transition-all duration-200 shadow-sm hover:shadow-md active:scale-98;
     @apply bg-gray-900 text-white hover:bg-gray-800;
   }
 
   .luxury-badge {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-sm text-xs font-semibold tracking-wider uppercase bg-[#C9A46A]/15 text-[#C9A46A];
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-none text-xs font-semibold tracking-wider uppercase bg-[#D71920]/10 text-[#D71920];
   }
 
   /* Spacing system tokens */
   .section-padding {
-    @apply py-12 md:py-24;
+    @apply py-16 md:py-28;
   }
 
   .container-padding {
@@ -348,17 +340,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C9A46A;
+  background: #D71920;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #C9A46A;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+  background: #be1218;
 }
 
 /* Video background optimization */
@@ -380,6 +367,16 @@ video {
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+section[id] {
+  scroll-margin-top: 6rem;
 }
 
 /* Mobile responsive improvements */

@@ -20,7 +20,7 @@ export default function NewDashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-          <p className="text-gray-600">Manage VanguardX Import & Export articles, gallery, annual reports, and inquiries</p>
+          <p className="text-gray-600">Manage Kenmos Engineering articles, gallery, annual reports, and inquiries</p>
         </div>
 
         {/* Tabs */}
@@ -190,7 +190,7 @@ function ArticlesTab() {
         excerpt,
         content,
         category,
-        author: "VanguardX Import & Export",
+        author: "Kenmos Engineering",
         read_time: `${readTime} min read`,
         image_url: imageUrl,
         status,

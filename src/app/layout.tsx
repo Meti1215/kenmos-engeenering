@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Poppins } from 'next/font/google'
+import { Inter, Manrope } from 'next/font/google'
 import './globals.css'
 
 import Chatbot from '@/components/Chatbot'
@@ -13,30 +13,29 @@ const inter = Inter({
   display: 'swap',
 })
 
-const poppins = Poppins({ 
+const manrope = Manrope({ 
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-poppins',
+  variable: '--font-manrope',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: `${brand.name} - ${brand.tagline}`,
-  description: 'Ker & Co. Business Group is a diversified Ethiopian business group with ventures spanning FMCG distribution, paper products, hospitality, wellness, real estate, mining, agriculture, and export growth.',
-  keywords: 'Ker & Co. Business Group, Ethiopia business group, hospitality Ethiopia, real estate Ethiopia, agriculture export Ethiopia, mining Ethiopia, paper products distribution',
+  description: `${brand.name} is an Ethiopian structural engineering firm founded in 2009 that specializes in structural design, steel structures, value engineering, and construction supervision.`,
+  keywords: 'Kenmos Engineering, Kenmos Structural Engineering, structural design Ethiopia, steel structures Addis Ababa, engineering consultant Ethiopia, value engineering, building construction supervision',
   authors: [{ name: brand.name }],
   robots: 'index, follow',
   metadataBase: new URL('http://localhost:3000'),
   openGraph: {
     title: `${brand.name} - ${brand.tagline}`,
-    description: 'Discover the story and the ventures of Ker & Co. Business Group across distribution, hospitality, real estate, mining, agriculture, and export.',
+    description: `Discover Kenmos Engineering, a premier Ethiopian structural engineering firm specializing in structural design and steel structures since 2009.`,
     type: 'website',
     locale: 'en_US',
   },
   icons: {
-    icon: brand.logoPath,
-    shortcut: brand.logoPath,
-    apple: brand.logoPath,
+    icon: '/images/favicon.ico',
+    shortcut: '/images/favicon.ico',
+    apple: '/images/favicon.ico',
   },
 }
 
@@ -46,9 +45,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <body className="font-sans antialiased bg-background text-foreground">
-
+    <html lang="en" className={`${inter.variable} ${manrope.variable} scroll-smooth`}>
+      <body className="font-sans antialiased bg-white text-[#111111]">
         <MobileMotionProvider>
           <ScrollProgress />
           {children}

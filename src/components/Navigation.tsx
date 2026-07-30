@@ -2,394 +2,203 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MapPin, ChevronDown, Phone, Menu, X } from 'lucide-react'
+import { Menu, X, ArrowRight } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { brand } from '@/lib/brand'
 import { cn } from '@/lib/utils'
 
-const BEIGE = '#F8F4EF'
-
 const Navigation = () => {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const navRef = React.useRef<HTMLDivElement>(null)
-  
-  // Paths that should have transparent header at the top (dark hero)
-  const darkHeroPaths = ['/', '/about', '/leadership', '/partnerships']
-  const isDarkHeroPage = darkHeroPaths.includes(pathname)
-  const isTransparent = isDarkHeroPage && !scrolled
+  const [activeSection, setActiveSection] = useState('home')
+
+  const navItems = [
+    { name: 'Home', href: '#home', id: 'home' },
+    { name: 'About Us', href: '#about', id: 'about' },
+    { name: 'Services', href: '#services', id: 'services' },
+    { name: 'Projects', href: '#projects', id: 'projects' },
+    { name: 'Industries', href: '#industries', id: 'industries' },
+    { name: 'Our Process', href: '#process', id: 'process' },
+    { name: 'Careers', href: '#careers', id: 'careers' },
+    { name: 'Contact Us', href: '#contact', id: 'contact' },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
+
+      const scrollPosition = window.scrollY + 200
+
+      let currentActive = navItems[0].id
+      for (const item of navItems) {
+        const el = document.getElementById(item.id)
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          const sectionTop = rect.top + window.scrollY
+          const sectionBottom = sectionTop + rect.height
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            currentActive = item.id
+            break
+          }
+          if (scrollPosition >= sectionTop) {
+            currentActive = item.id
+          }
+        }
+      }
+
+      const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100
+      if (nearBottom) {
+        currentActive = navItems[navItems.length - 1].id
+      }
+      const nearTop = window.scrollY < 100
+      if (nearTop) {
+        currentActive = 'home'
+      }
+
+      setActiveSection(currentActive)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
-        setOpenDropdown(null)
-      }
-    }
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setOpenDropdown(null)
-        setMobileMenuOpen(false)
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    document.addEventListener('keydown', handleEscape)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-      document.removeEventListener('keydown', handleEscape)
-    }
-  }, [])
-
-  type NavLeafItem = {
-    name: string
-    href: string
-    children?: never
-    variant?: 'default' | 'contact'
-  }
-  type NavGroupItem = {
-    name: string
-    children: Array<{ name: string; href: string }>
-    href?: string
-    variant?: never
-  }
-
-  const navItems: Array<NavLeafItem | NavGroupItem> = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    {
-      name: 'Departments',
-      href: '/departments',
-      children: [
-        { name: 'FMCG & Rural Distribution', href: '/departments#distribution' },
-        { name: 'Paper & Sanitary Products', href: '/departments#paper' },
-        { name: 'Hospitality & Wellness', href: '/departments#hospitality' },
-        { name: 'Real Estate Development', href: '/departments#real-estate' },
-      ],
-    },
-    { name: 'Partners', href: '/partnerships' },
-    { name: 'Leadership', href: '/leadership' },
-    {
-      name: 'More',
-      children: [
-        { name: 'News & Articles', href: '/articles' },
-        { name: 'Events', href: '/events' },
-        { name: 'Gallery', href: '/gallery' },
-        { name: 'Careers', href: '/careers' },
-      ],
-    },
-    { name: 'Location', href: '#contact' },
-  ]
-
-  const contactUsItem: NavLeafItem = { 
-    name: 'Contact Us', 
-    href: '#contact', 
-    variant: 'contact' 
-  }
-
-  const isNavActive = (href: string) => {
-    if (href.startsWith('#')) return false
-    if (href === '/') return pathname === '/' || pathname === '/index.html'
-    return pathname === href || pathname.startsWith(`${href}/`)
-  }
-
-  const isGroupActive = (item: NavGroupItem) => {
-    if (item.href && isNavActive(item.href)) return true
-    return item.children.some((child) => {
-      const childPath = child.href.split('#')[0]
-      return childPath ? isNavActive(childPath) : false
-    })
-  }
-
-  const handleNavigation = (href: string) => {
-    if (href.startsWith('#')) {
-      if (window.location.pathname !== '/') {
-        window.location.href = '/' + href
-      } else {
-        const element = document.querySelector(href)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }
-      }
-      setOpenDropdown(null)
-      setMobileMenuOpen(false)
+  const handleNavigation = (href: string, id: string) => {
+    setMobileMenuOpen(false)
+    if (pathname !== '/') {
+      window.location.href = '/' + href
     } else {
-      window.location.href = href
-      setOpenDropdown(null)
-      setMobileMenuOpen(false)
+      const element = document.getElementById(id)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+        setActiveSection(id)
+      }
     }
   }
 
-  const headerPadding =
-    'px-6 sm:px-10 md:px-14 lg:px-[64px] xl:px-[80px] 2xl:px-[96px]'
-
-  const navLinkBase =
-    'relative whitespace-nowrap text-[14px] md:text-[15px] lg:text-[16px] font-medium tracking-[0.03em] transition-colors duration-200 py-1'
-
-  const getNavLinkClass = (active: boolean, isHome?: boolean, isTransparent?: boolean) =>
-    cn(
-      navLinkBase,
-      'after:absolute after:left-0 after:-bottom-2 after:h-[2px] after:transition-all after:duration-300',
-      active
-        ? (isTransparent
-            ? 'text-white after:w-full after:bg-white'
-            : 'text-black after:w-full after:bg-black')
-        : (isTransparent
-            ? 'text-white after:w-0 after:bg-white hover:after:w-full'
-            : 'text-black after:w-0 after:bg-black hover:after:w-full')
-    )
-
-  const renderNavItem = (item: NavLeafItem | NavGroupItem, isTransparent?: boolean) => {
-    if ('variant' in item && item.variant === 'contact') {
-      return (
-        <button
-          key={item.name}
-          type="button"
-          onClick={() => handleNavigation(item.href)}
-          className="shrink-0 inline-flex items-center justify-center h-10 md:h-11 px-5 md:px-6 text-[14px] md:text-[15px] font-semibold text-white bg-[#C9A46A] hover:bg-[#b08e56] transition-all duration-300 shadow-sm rounded-sm"
-        >
-          {item.name}
-        </button>
-      )
-    }
-
-    if ('children' in item) {
-      const isActive = openDropdown === item.name
-      const isCurrent = isGroupActive(item as NavGroupItem)
-      const hasLandingHref = Boolean(item.href)
-      return (
-        <div
-          key={item.name}
-          className="relative shrink-0"
-          onMouseEnter={() => setOpenDropdown(item.name)}
-          onMouseLeave={() => setOpenDropdown(null)}
-        >
-          <div className="inline-flex items-center gap-0.5">
-            <button
-              type="button"
-              onClick={() => {
-                if (hasLandingHref && item.href) {
-                  handleNavigation(item.href)
-                  return
-                }
-                setOpenDropdown(isActive ? null : item.name)
-              }}
-              className={cn('inline-flex items-center', getNavLinkClass(isCurrent, undefined, isTransparent))}
-            >
-              <span>{item.name}</span>
-            </button>
-
-            <button
-              type="button"
-              aria-label={`Toggle ${item.name} menu`}
-              onClick={() => setOpenDropdown(isActive ? null : item.name)}
-              className={cn(
-                'p-1 rounded-[6px] transition-colors hover:bg-[#F8F4EF]',
-                isTransparent ? 'text-white hover:text-[#C9A46A]' : 'text-black hover:text-[#C9A46A]'
-              )}
-            >
-              <ChevronDown
-                className={cn(
-                  'w-4 h-4 transition-transform duration-200',
-                  isActive ? 'rotate-180 text-[#C9A46A]' : 'rotate-0'
-                )}
-                strokeWidth={1.75}
-              />
-            </button>
-          </div>
-
-          <AnimatePresence>
-            {isActive && (
-              <motion.div
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 6 }}
-                transition={{ duration: 0.15 }}
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 rounded-sm bg-white shadow-[0_20px_48px_rgba(34,34,34,0.08)] border border-[#E7DED2] overflow-hidden z-50"
-              >
-                <div className="py-2">
-                  {item.children?.map((child) => (
-                    <button
-                      key={child.name}
-                      type="button"
-                      onClick={() => handleNavigation(child.href)}
-                      className="w-full text-left px-5 py-3 text-[14px] text-[#222222] hover:bg-[#F8F4EF] hover:text-[#C9A46A] transition-colors"
-                    >
-                      {child.name}
-                    </button>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      )
-    }
-
-    return (
-      <button
-        key={item.name}
-        type="button"
-        onClick={() => handleNavigation(item.href)}
-        className={cn('shrink-0', getNavLinkClass(isNavActive(item.href), item.name === 'Home', isTransparent))}
-      >
-        {item.name}
-      </button>
-    )
-  }
+  // Custom Structural SVG Logo for Kenmos
+  const Logo = () => (
+    <div className="flex items-center gap-3">
+      {/* Red K stylized like structural columns and trusses */}
+      <svg className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Main Vertical Column */}
+        <rect x="15" y="10" width="16" height="80" fill="#D71920" />
+        {/* Top diagonal strut */}
+        <path d="M78 15H55L31 46V62L62 25H78V15Z" fill="#D71920" />
+        {/* Bottom diagonal strut */}
+        <path d="M31 52V68L68 90H88L48 52H31Z" fill="#D71920" />
+        {/* Horizontal tie truss */}
+        <line x1="31" y1="52" x2="48" y2="52" stroke="#FFFFFF" strokeWidth="4" />
+      </svg>
+      <div className="flex flex-col select-none">
+        <span className="text-xl md:text-2xl font-black font-heading tracking-tight leading-[0.95] text-black">
+          KEN<span className="text-[#D71920]">MOS</span>
+        </span>
+        <span className="text-[9px] md:text-[10px] font-bold tracking-[0.35em] text-gray-500 uppercase leading-none mt-1">
+          Engineering
+        </span>
+      </div>
+    </div>
+  )
 
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ease-in-out',
-        scrolled && 'shadow-[0_4px_32px_rgba(0,0,0,0.07)]'
+        'fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 bg-white border-b border-gray-100',
+        scrolled ? 'shadow-md py-2 md:py-3' : 'py-3 md:py-5'
       )}
     >
-      {/* Main navigation bar */}
-      <nav
-        className={cn(
-          'w-full transition-all duration-300 ease-in-out border-b',
-          isTransparent
-            ? 'bg-transparent border-transparent'
-            : 'bg-white border-[#E8E2DA]',
-          headerPadding
-        )}
-      >
-        <div className="flex items-center justify-between h-[72px] md:h-[80px] lg:h-[88px] gap-3 lg:gap-8 lg:grid lg:grid-cols-[auto_1fr_auto] max-w-[1600px] mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          
           {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, x: -12 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex shrink-0 items-center cursor-pointer group -ml-2"
-            onClick={() => handleNavigation('/')}
-          >
-            <img
-              src={brand.logoPath}
-              alt={`${brand.name} Logo`}
-              className="w-[130px] h-[52px] sm:w-[145px] sm:h-[58px] md:w-[160px] md:h-[64px] lg:w-[180px] lg:h-[72px] object-contain mix-blend-multiply"
-            />
-          </motion.div>
-
-          {/* Centered navigation links (desktop only) */}
-          <div ref={navRef} className="hidden lg:flex items-center justify-center min-w-0">
-            <div className="flex items-center gap-x-6 md:gap-x-8 lg:gap-x-10 xl:gap-x-13 px-2">
-              {navItems.map((item) => renderNavItem(item, isTransparent))}
-            </div>
+          <div className="cursor-pointer" onClick={() => handleNavigation('#home', 'home')}>
+            <Logo />
           </div>
 
-          {/* Contact Us button (desktop only) */}
-          <div className="hidden lg:flex items-center justify-end">
-            {renderNavItem(contactUsItem, isTransparent)}
+          {/* Navigation Links (Desktop) */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                type="button"
+                onClick={() => handleNavigation(item.href, item.id)}
+                className={cn(
+                  'relative text-xs xl:text-sm font-bold uppercase tracking-wider transition-colors py-2 text-gray-700 hover:text-[#D71920]',
+                  activeSection === item.id && 'text-[#D71920] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#D71920]'
+                )}
+              >
+                {item.name}
+              </button>
+            ))}
+          </nav>
+
+          {/* Get a Quote Button (Desktop) */}
+          <div className="hidden lg:flex">
+            <button
+              type="button"
+              onClick={() => handleNavigation('#contact', 'contact')}
+              className="inline-flex items-center gap-2 bg-[#D71920] hover:bg-[#be1218] text-white text-xs font-bold uppercase tracking-wider px-5 py-3 transition-colors duration-200"
+            >
+              Get a Quote
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
 
-          {/* Hamburger button (mobile/tablet only) */}
-          <div className="flex lg:hidden">
+          {/* Hamburger Menu (Mobile) */}
+          <div className="lg:hidden">
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-[#C9A46A]"
-              aria-label="Toggle navigation menu"
+              className="text-[#D71920] p-1 focus:outline-none"
+              aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+              {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
             </button>
           </div>
+
         </div>
+      </div>
 
-        {/* Mobile menu */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0, y: -10 }}
-              animate={{ opacity: 1, height: 'auto', y: 0 }}
-              exit={{ opacity: 0, height: 0, y: -10 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="lg:hidden bg-white border-b border-[#E8E2DA] overflow-hidden"
-            >
-              <div className="px-6 sm:px-10 md:px-14 py-6 space-y-4">
-                {navItems.map((item) => {
-                  if ('children' in item) {
-                    const isActive = openDropdown === item.name
-                    const isCurrent = isGroupActive(item as any)
-                    return (
-                      <div key={item.name} className="space-y-2">
-                        <button
-                          type="button"
-                          onClick={() => setOpenDropdown(isActive ? null : item.name)}
-                          className={cn(
-                            'w-full flex items-center justify-between text-left',
-                            getNavLinkClass(isCurrent)
-                          )}
-                        >
-                          <span>{item.name}</span>
-                          <ChevronDown
-                            className={cn(
-                              'w-5 h-5 transition-transform duration-200',
-                              isActive ? 'rotate-180' : ''
-                            )}
-                            strokeWidth={1.75}
-                          />
-                        </button>
-                        <AnimatePresence>
-                          {isActive && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
-                              exit={{ opacity: 0, height: 0 }}
-                              className="pl-4 space-y-2"
-                            >
-                              {item.children?.map((child) => (
-                                <button
-                                  key={child.name}
-                                  type="button"
-                                  onClick={() => handleNavigation(child.href)}
-                                  className="w-full text-left py-2 text-[14px] text-[#222222] hover:text-[#C9A46A] transition-colors"
-                                >
-                                  {child.name}
-                                </button>
-                              ))}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    )
-                  }
-
-                  return (
-                    <button
-                      key={item.name}
-                      type="button"
-                      onClick={() => handleNavigation(item.href)}
-                      className={cn('w-full text-left', getNavLinkClass(isNavActive(item.href), item.name === 'Home'))}
-                    >
-                      {item.name}
-                    </button>
-                  )
-                })}
-                {/* Contact Us button in mobile menu */}
+      {/* Mobile Navigation Drawer */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden bg-white border-t border-gray-100 overflow-hidden"
+          >
+            <div className="px-4 py-6 space-y-3">
+              {navItems.map((item) => (
                 <button
-                  key={contactUsItem.name}
+                  key={item.name}
                   type="button"
-                  onClick={() => handleNavigation(contactUsItem.href)}
-                  className="w-full inline-flex items-center justify-center h-10 md:h-11 px-6 md:px-7 text-[14px] md:text-[15px] font-semibold text-white rounded-sm bg-[#C9A46A] hover:bg-[#C9A46A] transition-colors duration-200 shadow-sm"
+                  onClick={() => handleNavigation(item.href, item.id)}
+                  className={cn(
+                    'block w-full text-left py-2.5 px-4 text-sm font-bold uppercase tracking-wider text-gray-700 hover:bg-gray-50 hover:text-[#D71920] transition-colors',
+                    activeSection === item.id && 'text-[#D71920] bg-red-50/50 border-l-4 border-[#D71920]'
+                  )}
                 >
-                  {contactUsItem.name}
+                  {item.name}
+                </button>
+              ))}
+              <div className="pt-4 px-4">
+                <button
+                  type="button"
+                  onClick={() => handleNavigation('#contact', 'contact')}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#D71920] hover:bg-[#be1218] text-white text-sm font-bold uppercase tracking-wider py-3 transition-colors shadow-sm"
+                >
+                  Get a Quote
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

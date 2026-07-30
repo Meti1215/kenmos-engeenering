@@ -2,105 +2,88 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Gem, Mountain } from 'lucide-react'
+import { ArrowRight, Building2, HardHat } from 'lucide-react'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
-import { Button } from '@/components/ui/button'
-
-type ProjectCard = {
-  title: string
-  subtitle: string
-  description: string
-  href: string
-  image: string
-  icon: React.ElementType
-}
+import { projects } from '@/lib/brand'
 
 export default function ProjectsPage() {
-  const projects: ProjectCard[] = [
-    {
-      title: 'Okote Gold Exploration Project',
-      subtitle: 'Exploration Program',
-      description:
-        'Systematic field exploration focused on trenching, sampling, and access development to support disciplined evaluation.',
-      href: '/projects/okote/',
-      image:
-        '/Photoes and Videoes for Documentary/OKOTE Photoe and Video for Documenetary/PHOTOES/EXPLORATION_FIELD/Sunrise at Hallo from OKOTE_Ebicha.jpeg',
-      icon: Gem,
-    },
-    {
-      title: 'Aleltu Quarry & Aggregate Production',
-      subtitle: 'Quarry & Crushing',
-      description:
-        'End-to-end quarry development and aggregate production—from drilling and blasting to crushing, stockpiling, and dispatch.',
-      href: '/projects/aleltu/',
-      image:
-        '/Photoes and Videoes for Documentary/ALELTU Photes and Videoes for Documentary/PHOTOES/Crushed aggregate products.jpeg',
-      icon: Mountain,
-    },
-  ]
-
   return (
-    <main className="relative min-h-screen bg-gray-50">
+    <main className="relative min-h-screen bg-white">
       <Navigation />
 
-      <section className="pt-navbar pb-14 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-5 font-heading">
-              Our <span className="text-[#C9A46A]">Projects</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">
-              Explore our flagship projects and the work we deliver across exploration, quarry development, and responsible operations.
-            </p>
-          </motion.div>
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-16 md:pb-24 px-4 sm:px-6 lg:px-8 bg-[#111112] text-white">
+        <div className="relative max-w-7xl mx-auto text-center flex flex-col items-center gap-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 text-[#D71920] text-xs font-bold uppercase tracking-wider">
+            <Building2 className="w-4 h-4" />
+            Our Works
+          </div>
+          <h1 className="text-4xl md:text-6xl font-black text-[#D71920] font-heading uppercase leading-none mt-2">
+            Engineering Projects
+          </h1>
+          <p className="text-sm md:text-lg text-gray-300 max-w-3xl leading-relaxed mt-2 font-light">
+            A selective showcase of institutional grandstands, mixed-use headquarters, and specialized structures designed and supervised by Kenmos Engineering.
+          </p>
         </div>
       </section>
 
-      <section className="pb-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8">
+      {/* Projects Grid */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-12">
           {projects.map((p, idx) => (
             <motion.div
-              key={p.title}
-              initial={{ opacity: 0, y: 20 }}
+              key={p.id}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="group rounded-sm overflow-hidden bg-white shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300"
+              transition={{ delay: idx * 0.1, duration: 0.5 }}
+              className="group border border-gray-100 flex flex-col justify-between shadow-sm hover:shadow-lg transition-all duration-300 bg-white"
             >
-              <div className="relative aspect-[16/10] overflow-hidden bg-gray-200">
-                <img
-                  src={encodeURI(p.image)}
-                  alt={p.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-white/15 text-white text-sm font-semibold backdrop-blur">
-                    <p.icon className="w-4 h-4 text-[#C9A46A]" />
-                    {p.subtitle}
+              <div>
+                {/* Image */}
+                <div className="relative aspect-[16/10] overflow-hidden bg-gray-950">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  
+                  <div className="absolute bottom-6 left-6 text-white">
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-2.5 py-1 text-white border border-white/20">
+                      {p.category}
+                    </span>
+                    <h2 className="text-2xl font-black font-heading mt-3 uppercase tracking-tight leading-tight">
+                      {p.title}
+                    </h2>
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-white mt-3">{p.title}</h2>
+                </div>
+
+                {/* Description */}
+                <div className="p-8">
+                  <p className="text-sm text-gray-500 font-light leading-relaxed">
+                    {p.description}
+                  </p>
                 </div>
               </div>
 
-              <div className="p-7">
-                <p className="text-gray-600 leading-relaxed">{p.description}</p>
-                <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                  <Button onClick={() => (window.location.href = p.href)}>
-                    View details
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                  <Button variant="outline" onClick={() => (window.location.href = '/gallery/')}
-                  >
-                    View gallery
-                  </Button>
-                </div>
+              {/* Card Footer Action */}
+              <div className="p-8 pt-0 flex justify-start">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const el = document.getElementById('contact')
+                    if (el) el.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                  className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D71920] hover:text-red-700 transition-colors"
+                >
+                  Discuss Project
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </div>
+
             </motion.div>
           ))}
         </div>

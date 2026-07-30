@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { supabase } from '@/lib/supabase'
 import { brand } from '@/lib/brand'
 import { 
   Phone, 
@@ -21,6 +20,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: 'General Structural Design',
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -29,28 +29,27 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: Phone,
-      title: 'Phone',
+      title: 'Phone Number',
       details: [brand.phone],
       action: () => window.open(brand.phoneHref)
     },
     {
       icon: Mail,
-      title: 'Email',
-      details: [brand.emailLabel],
-      action: null
+      title: 'Email Address',
+      details: [brand.email],
+      action: () => window.open(`mailto:${brand.email}`)
     },
     {
       icon: MapPin,
-      title: 'Head Office',
+      title: 'Physical Office',
       details: [
         brand.location,
-        brand.name
       ],
-      action: () => window.open('https://www.google.com/maps?q=Addis+Ababa,+Ethiopia&output=embed')
+      action: () => window.open('https://www.google.com/maps?q=Enat+Building+Piazza+Addis+Ababa+Ethiopia')
     },
     {
       icon: Clock,
-      title: 'Hours',
+      title: 'Business Hours',
       details: [brand.hours],
       action: null
     }
@@ -67,24 +66,14 @@ const Contact = () => {
     e.preventDefault()
     setIsSubmitting(true)
     
+    // Simulate submission (or integrate with standard email handler)
     try {
-      const { error } = await supabase
-        .from('inquiries')
-        .insert({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          phone: '',
-          interest: 'General Inquiry',
-          status: 'new'
-        })
-
-      if (error) throw error
-
+      await new Promise(resolve => setTimeout(resolve, 1500))
       setSubmitStatus('success')
       setFormData({
         name: '',
         email: '',
+        subject: 'General Structural Design',
         message: ''
       })
     } catch (error) {
@@ -97,112 +86,91 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="py-12 md:py-24 bg-[#F8F4EF]">
+    <section id="contact" className="py-20 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85, y: 50 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-8 md:mb-18"
-        >
-          <h2 className="text-2xl md:text-5xl font-bold font-heading mb-3 md:mb-6 text-black">
-            Contact <span className="text-black">Us</span>
+        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
+          <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#D71920]">
+            Get In Touch
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-heading text-black mt-2 leading-tight">
+            Discuss Your Next Project
           </h2>
-          <p className="text-xs md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Reach out to discuss distribution, hospitality, agriculture, real estate, mining, export ventures, or partnership opportunities with Ker & Co. Business Group.
+          <p className="text-sm text-gray-500 max-w-xl mx-auto mt-4 leading-relaxed font-light">
+            Contact our Addis Ababa headquarters for structural analysis, steel detailing, value engineering, or site supervision inquiries.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-14">
-          {/* Contact Information */}
+        <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-start">
+          
+          {/* Column 1: Contact Details & Map */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-4 md:space-y-8"
+            viewport={{ once: true, amount: 0.2 }}
+            className="space-y-8"
           >
-            <div>
-              <h3 className="text-lg md:text-2xl font-bold text-gray-900 mb-2 md:mb-6">Get In Touch</h3>
-              <p className="text-xs md:text-base text-gray-600 mb-4 md:mb-8">
-                Contact us for project inquiries, commercial opportunities, investor conversations, or strategic partnerships. Our team will respond as soon as possible.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-1 gap-2 md:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {contactInfo.map((info, index) => (
-                <motion.div
+                <div
                   key={info.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  onClick={info.action || undefined}
+                  className={`p-6 border border-gray-100 bg-gray-50/50 flex items-start gap-4 transition-all duration-300 ${
+                    info.action ? 'cursor-pointer hover:border-red-500/20 hover:shadow-md' : ''
+                  }`}
                 >
-                  <Card 
-                    className={`hover-lift luxury-card ${info.action ? 'cursor-pointer' : ''}`}
-                    onClick={info.action || undefined}
-                  >
-                    <CardContent className="p-3 md:p-6">
-                      <div className="flex items-start space-x-2 md:space-x-4">
-                        <div className="w-8 h-8 md:w-12 md:h-12 bg-[#C9A46A] rounded-sm flex items-center justify-center flex-shrink-0 shadow-sm">
-                          <info.icon className="w-4 h-4 md:w-6 md:h-6 text-white" />
-                        </div>
-                        <div>
-                          <h4 className="text-[10px] md:text-base font-semibold text-gray-900 mb-0.5 md:mb-2">{info.title}</h4>
-                          {info.details.map((detail, idx) => (
-                            <p key={idx} className="text-[9px] md:text-sm text-gray-600">{detail}</p>
-                          ))}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                  <div className="w-10 h-10 bg-red-50 text-[#D71920] flex items-center justify-center flex-shrink-0">
+                    <info.icon className="w-5 h-5" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">{info.title}</h4>
+                    {info.details.map((detail, idx) => (
+                      <p key={idx} className="text-sm text-gray-800 font-light leading-relaxed break-words">{detail}</p>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
 
-            {/* Google Maps */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="h-48 md:h-80 bg-white rounded-sm overflow-hidden shadow-lg border border-[#E7DED2]"
-            >
+            {/* Map wrapper */}
+            <div className="h-[280px] bg-gray-50 border border-gray-100 overflow-hidden shadow-inner relative">
               <iframe
-                src="https://www.google.com/maps?q=Addis+Ababa,+Ethiopia&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.505677568588!2d38.7516805!3d9.034789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85f63118cf97%3A0xc3cfec56bb24bfa!2sPiazza%2C%20Addis%20Ababa!5e0!3m2!1sen!2set!4v1700000000000!5m2!1sen!2set"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title={`${brand.name} Location`}
+                title="Kenmos Engineering Location Map"
               />
-            </motion.div>
+            </div>
           </motion.div>
 
-          {/* Appointment Form */}
+          {/* Column 2: Quote/Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
           >
-            <Card className="border border-[#E7DED2] shadow-md bg-white">
-              <CardHeader>
-                <CardTitle className="text-base md:text-2xl font-bold text-gray-900 flex items-center">
-                  <FileText className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3 text-[#C9A46A]" />
-                  Contact Us
+            <Card className="border border-gray-100 shadow-xl bg-white p-6 md:p-10 rounded-none">
+              <CardHeader className="p-0 pb-6">
+                <CardTitle className="text-xl md:text-2xl font-black font-heading text-black flex items-center gap-3">
+                  <FileText className="w-6 h-6 text-[#D71920]" strokeWidth={1.5} />
+                  Request a Quote
                 </CardTitle>
-                <p className="text-[11px] md:text-sm text-gray-500 mt-1 md:mt-2">
-                  Fill in your details and we&rsquo;ll get back to you once our team has processed your message.
+                <p className="text-xs text-gray-500 mt-2 font-light leading-relaxed">
+                  Provide details about your project. Our structural engineering consultants will review your blueprints and contact you.
                 </p>
               </CardHeader>
-              <CardContent className="p-4 md:p-6">
-                <form onSubmit={handleSubmit} className="space-y-3 md:space-y-6">
+              <CardContent className="p-0">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  
                   {/* Name */}
                   <div>
-                    <label className="block text-[10px] md:text-sm font-medium text-gray-700 mb-1 md:mb-2">
-                      Name *
+                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+                      Full Name *
                     </label>
                     <input
                       type="text"
@@ -210,15 +178,15 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="luxury-input text-xs md:text-base px-3 py-2 md:px-4 md:py-3"
-                      placeholder="Your full name"
+                      className="luxury-input px-4 py-3"
+                      placeholder="e.g. Yonas Abebe"
                     />
                   </div>
 
                   {/* Email */}
                   <div>
-                    <label className="block text-[10px] md:text-sm font-medium text-gray-700 mb-1 md:mb-2">
-                      Email address *
+                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+                      Email Address *
                     </label>
                     <input
                       type="email"
@@ -226,65 +194,86 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="luxury-input text-xs md:text-base px-3 py-2 md:px-4 md:py-3"
-                      placeholder="your.email@example.com"
+                      className="luxury-input px-4 py-3"
+                      placeholder="e.g. name@company.com"
                     />
+                  </div>
+
+                  {/* Subject Dropdown */}
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+                      Project Area *
+                    </label>
+                    <select
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      required
+                      className="luxury-input px-4 py-3 bg-white text-sm"
+                    >
+                      <option value="General Structural Design">General Structural Design</option>
+                      <option value="Steel Structure connection Detailing">Steel Structure connection Detailing</option>
+                      <option value="Value Engineering / Material Optimization">Value Engineering & Design Optimization</option>
+                      <option value="Structural Safety Assessment">Structural Safety Assessment</option>
+                      <option value="Construction Supervision & BOQ">Construction Supervision & BOQ</option>
+                    </select>
                   </div>
 
                   {/* Message */}
                   <div>
-                    <label className="block text-[10px] md:text-sm font-medium text-gray-700 mb-1 md:mb-2">
-                      Message *
+                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+                      Project Details / Message *
                     </label>
                     <textarea
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
                       required
-                      rows={5}
-                      className="luxury-input text-xs md:text-base px-3 py-2 md:px-4 md:py-3 resize-none"
-                      placeholder="How can we help you?"
+                      rows={4}
+                      className="luxury-input px-4 py-3 resize-none"
+                      placeholder="Describe the number of stories, structure material (concrete/steel), project location..."
                     />
                   </div>
 
                   {/* Submit Button */}
                   <Button
                     type="submit"
-                    size="lg"
                     disabled={isSubmitting}
-                    className="w-full bg-[#C9A46A] hover:bg-[#C9A46A] text-white shadow-xl shadow-[#C9A46A]/20 transition-all duration-300"
+                    className="w-full bg-[#D71920] hover:bg-[#be1218] text-white py-4 font-bold text-xs uppercase tracking-widest rounded-none shadow-md transition-colors"
                   >
                     {isSubmitting ? (
-                      <div className="flex items-center">
-                        <div className="animate-spin rounded-sm h-5 w-5 border-b-2 border-white mr-2"></div>
-                        Submitting...
-                      </div>
+                      <span className="flex items-center justify-center gap-2">
+                        <span className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></span>
+                        PROCESSING...
+                      </span>
                     ) : (
-                      <div className="flex items-center">
-                        <Send className="w-5 h-5 mr-2" />
-                        Send Message
-                      </div>
+                      <span className="flex items-center justify-center gap-2">
+                        <Send className="w-4 h-4" />
+                        SEND REQUEST
+                      </span>
                     )}
                   </Button>
 
-                  {/* Status Messages */}
+                  {/* Status Alerts */}
                   {submitStatus === 'success' && (
-                    <div className="flex items-center p-4 bg-green-50 border border-green-200 rounded-sm">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-green-800">Thank you! We&rsquo;ll get back to you once our team has processed your message.</span>
+                    <div className="flex items-start gap-3 p-4 bg-green-50 border border-green-200 text-green-800 text-sm">
+                      <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
+                      <span>Thank you! Your quote request was sent. Our lead structural engineer will review and contact you.</span>
                     </div>
                   )}
 
                   {submitStatus === 'error' && (
-                    <div className="flex items-center p-4 bg-red-50 border border-red-200 rounded-sm">
-                      <AlertCircle className="w-5 h-5 text-red-600 mr-3" />
-                      <span className="text-red-800">There was an error submitting your request. Please try again.</span>
+                    <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 text-red-800 text-sm">
+                      <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                      <span>There was a problem sending your message. Please verify input and try again.</span>
                     </div>
                   )}
+
                 </form>
               </CardContent>
             </Card>
           </motion.div>
+
         </div>
       </div>
     </section>

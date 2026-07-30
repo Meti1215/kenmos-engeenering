@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
-// Your web app's Firebase configuration (VanguardX Import & Export project)
+// Firebase configuration for Kenmos Engineering admin auth
 const firebaseConfig = {
   apiKey: "AIzaSyDfm1e_jo5GsdGkAMtT6g6tpqpw5DxCiNw",
   authDomain: "vanguardx-import-export.firebaseapp.com",

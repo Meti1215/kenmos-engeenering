@@ -2,143 +2,57 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, HeartHandshake, Users, MapPin, ShieldCheck } from 'lucide-react'
+import { Heart, ShieldCheck, GraduationCap } from 'lucide-react'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
-import { Button } from '@/components/ui/button'
-import { brand, brandMedia } from '@/lib/brand'
+import { brand } from '@/lib/brand'
 
-export default function CSRPage() {
-  const heroImage = brandMedia.ventures.agriculture
-
-  const highlights = [
+export default function CsrPage() {
+  const pillars = [
     {
-      title: 'Community Engagement',
-      description:
-        'We prioritize respectful collaboration with communities connected to our ventures and growth activities.',
-      icon: Users,
-    },
-    {
-      title: 'Access & Local Development',
-      description:
-        'Practical investment and local engagement can support mobility, safety, livelihoods, and business participation.',
-      icon: MapPin,
-    },
-    {
-      title: 'Responsible Operations',
-      description:
-        'We aim to integrate safety, stewardship, and disciplined execution into planning, operations, and expansion.',
+      title: 'Structural Safety Audits',
+      description: 'We conduct complimentary structural safety checks and integrity assessments for public facilities and school buildings in Addis Ababa.',
       icon: ShieldCheck,
+    },
+    {
+      title: 'Engineering Internship Mentorship',
+      description: 'We run a regular mentorship program for young Ethiopian civil engineering students from Addis Ababa University, providing hands-on steel detailing experience.',
+      icon: GraduationCap,
     },
   ]
 
   return (
-    <main className="relative min-h-screen bg-gray-50">
+    <main className="relative min-h-screen bg-white">
       <Navigation />
 
-      <section className="pt-navbar pb-14 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-[#C9A46A]/10 text-[#C9A46A] text-sm font-semibold">
-              <HeartHandshake className="w-4 h-4" />
-              CSR & Community Impact
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mt-4 mb-5 font-heading">
-              Community <span className="text-[#C9A46A]">Impact</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-              {brand.name} is committed to building ventures that create opportunity, strengthen communities, and support sustainable local development.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <Button onClick={() => (window.location.href = '/gallery/')}
-              >
-                View CSR media
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-              <Button variant="outline" onClick={() => (window.location.href = '/#contact')}
-              >
-                Contact us
-              </Button>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="relative overflow-hidden rounded-sm shadow-xl bg-gray-200"
-          >
-            <div className="relative aspect-[16/11]">
-              <img
-                src={encodeURI(heroImage)}
-                alt="CSR"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
-            </div>
-          </motion.div>
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-16 md:pb-24 px-4 sm:px-6 lg:px-8 bg-[#111112] text-white">
+        <div className="relative max-w-7xl mx-auto text-center flex flex-col items-center gap-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 text-[#D71920] text-xs font-bold uppercase tracking-wider">
+            <Heart className="w-4 h-4" />
+            Social Responsibility
+          </div>
+          <h1 className="text-4xl md:text-6xl font-black text-[#D71920] font-heading uppercase leading-none mt-2">
+            Our Commitments
+          </h1>
+          <p className="text-sm md:text-lg text-gray-300 max-w-3xl leading-relaxed mt-2 font-light">
+            Sharing our structural engineering expertise to build a safer, more skilled society in Ethiopia.
+          </p>
         </div>
       </section>
 
-      <section className="pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-6">
-            {highlights.map((h, idx) => (
-              <motion.div
-                key={h.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.08 }}
-                className="rounded-sm bg-white border border-gray-100 shadow-sm p-7"
-              >
-                <div className="inline-flex w-12 h-12 rounded-sm bg-[#C9A46A]/10 items-center justify-center">
-                  <h.icon className="w-6 h-6 text-[#C9A46A]" />
-                </div>
-                <h2 className="text-xl font-bold text-gray-900 mt-4">{h.title}</h2>
-                <p className="text-gray-600 mt-2 leading-relaxed">{h.description}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mt-12 rounded-sm bg-[#C9A46A]/5 border border-[#C9A46A]/20 p-8 md:p-10"
-          >
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Our Approach</h2>
-            <p className="text-gray-600 mt-3 leading-relaxed max-w-4xl">
-              At {brand.shortName}, we believe business growth should create meaningful value beyond commercial results. We seek to grow in ways that strengthen livelihoods, support responsible operations, and contribute to sustainable local development.
-            </p>
-          </motion.div>
-
-          <div className="mt-12 rounded-sm bg-gradient-to-r from-[#C9A46A] to-[#C9A46A] text-white p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-white/10 text-white text-sm font-semibold">
-                <HeartHandshake className="w-4 h-4" />
-                Learn More
+      {/* CSR Pillars Grid */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8">
+          {pillars.map((item, idx) => (
+            <div key={item.title} className="border border-gray-100 p-8 flex flex-col gap-4 bg-white hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-red-50 text-[#D71920] flex items-center justify-center">
+                <item.icon className="w-6 h-6" strokeWidth={1.5} />
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold mt-4">Explore Our Impact</h3>
-              <p className="text-white/80 mt-2 leading-relaxed max-w-2xl">
-                Browse our gallery, learn about our ventures, and see how {brand.shortName} is building impact through growth and stewardship.
-              </p>
+              <h3 className="text-xl font-bold text-black">{item.title}</h3>
+              <p className="text-sm text-gray-500 font-light leading-relaxed">{item.description}</p>
             </div>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => (window.location.href = '/gallery')}
-              className="bg-white text-[#C9A46A] border-white hover:bg-gray-100"
-            >
-              Open Gallery
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </div>
+          ))}
         </div>
       </section>
 

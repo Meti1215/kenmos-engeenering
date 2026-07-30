@@ -2,282 +2,181 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Clock, 
-  Facebook,
-  Heart,
-  ArrowUp
-} from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Phone, Mail, MapPin, Clock, ArrowUp, HardHat } from 'lucide-react'
 import { brand } from '@/lib/brand'
 
 const Footer = () => {
   const quickLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about' },
-    { name: 'Departments', href: '/departments' },
-    { name: 'Partners', href: '/partnerships' },
-    { name: 'Leadership', href: '/leadership' },
-    { name: 'Contact', href: '/#contact' }
+    { name: 'Home', href: '#home' },
+    { name: 'About Us', href: '#about' },
+    { name: 'Services', href: '#services' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Industries', href: '#industries' },
   ]
 
-  const stakeholders = [
-    { name: 'FMCG & Rural Distribution', href: '/departments#distribution' },
-    { name: 'Paper & Sanitary Products', href: '/departments#paper' },
-    { name: 'Hospitality & Wellness', href: '/departments#hospitality' },
-    { name: 'Real Estate Development', href: '/departments#real-estate' },
-    { name: 'News & Articles', href: '/articles' },
-    { name: 'Events', href: '/events' },
-    { name: 'Gallery', href: '/gallery' },
-    { name: 'Careers', href: '/careers' }
+  const secondaryLinks = [
+    { name: 'Our Process', href: '#process' },
+    { name: 'Careers', href: '#careers' },
+    { name: 'Contact Us', href: '#contact' },
   ]
 
-  const legalLinks = [
-    { name: 'Compliance', href: '/compliance/' },
-    { name: 'Privacy Policy', href: '/privacy/' },
-    { name: 'Terms of Use', href: '/terms/' },
-    { name: 'Disclaimer', href: '/disclaimer/' }
-  ]
-
-  const services = [
-    'FMCG & essential goods distribution',
-    'Paper & sanitary products leadership',
-    'Hospitality & wellness operations',
-    'Real estate development',
-    'Mining, agriculture & export ventures'
+  const footerServices = [
+    'Structural Design & Analysis',
+    'Steel Structure Connection Detailing',
+    'Construction Supervision',
+    'Project Management',
+    'Structural Assessment & Retrofitting',
+    'Tender & BOQ Documentation',
   ]
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const scrollToSection = (href: string) => {
+  const handleNavigation = (href: string) => {
     if (href.startsWith('#')) {
-      if (window.location.pathname !== '/') {
-        window.location.href = '/' + href
-        return
-      }
       const element = document.querySelector(href)
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' })
       }
-      return
     }
-
-    window.location.href = href
   }
 
+  // Custom Structural SVG Logo
+  const Logo = () => (
+    <div className="flex items-center gap-3">
+      <svg className="w-8 h-8 flex-shrink-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="15" y="10" width="16" height="80" fill="#D71920" />
+        <path d="M78 15H55L31 46V62L62 25H78V15Z" fill="#D71920" />
+        <path d="M31 52V68L68 90H88L48 52H31Z" fill="#D71920" />
+        <line x1="31" y1="52" x2="48" y2="52" stroke="#FFFFFF" strokeWidth="4" />
+      </svg>
+      <div className="flex flex-col text-left">
+        <span className="text-lg font-black tracking-tight leading-none text-white">
+          KEN<span className="text-[#D71920]">MOS</span>
+        </span>
+        <span className="text-[8px] font-bold tracking-[0.3em] text-gray-400 uppercase leading-none mt-1">
+          Engineering
+        </span>
+      </div>
+    </div>
+  )
+
   return (
-    <footer className="bg-[#222222] text-white">
-      {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 md:gap-8">
-          {/* Company Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="col-span-2 lg:col-span-2"
-          >
-            <div className="flex items-center space-x-2 md:space-x-3 mb-3 md:mb-6">
-              <div className="w-9 h-9 md:w-12 md:h-12 rounded-sm flex items-center justify-center overflow-hidden">
-                <img 
-                  src={brand.logoPath} 
-                  alt={`${brand.name} Logo`} 
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div>
-                <h3 className="text-base md:text-2xl font-bold">{brand.name}</h3>
-                <p className="text-[10px] md:text-base text-gray-400 italic">{brand.tagline}</p>
-              </div>
-            </div>
-            
-            <p className="text-[10px] md:text-base text-gray-300 mb-3 md:mb-6 leading-relaxed">
-              A diversified Ethiopian business group with a story that spans consumer distribution, paper products, hospitality, wellness, real estate, mining, agriculture, and export growth.
+    <footer className="bg-[#111112] text-white border-t border-gray-900 pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16">
+          
+          {/* Column 1: Brand Info */}
+          <div className="flex flex-col gap-6">
+            <Logo />
+            <p className="text-sm text-gray-400 leading-relaxed font-light">
+              Kenmos Structural Engineering delivers innovative, safe, and cost-optimized structural designs and supervision in Ethiopia since 2009.
             </p>
-
-            {/* Contact Info */}
-            <div className="space-y-2 md:space-y-4">
-              <div className="flex items-center space-x-2 md:space-x-3">
-                <Phone className="w-3.5 h-3.5 md:w-5 md:h-5 text-[#C9A46A]" />
-                <span className="text-[10px] md:text-base text-gray-300">{brand.phone}</span>
-              </div>
-              <div className="flex items-center space-x-2 md:space-x-3">
-                <Mail className="w-3.5 h-3.5 md:w-5 md:h-5 text-[#C9A46A]" />
-                <span className="text-[10px] md:text-base text-gray-300">{brand.emailLabel}</span>
-              </div>
-              <div className="flex items-center space-x-2 md:space-x-3">
-                <MapPin className="w-3.5 h-3.5 md:w-5 md:h-5 text-[#C9A46A]" />
-                <span className="text-[10px] md:text-base text-gray-300">{brand.location}</span>
-              </div>
-              <div className="flex items-center space-x-2 md:space-x-3">
-                <Clock className="w-3.5 h-3.5 md:w-5 md:h-5 text-[#C9A46A]" />
-                <span className="text-[10px] md:text-base text-gray-300">{brand.hours}</span>
-              </div>
+            {/* Social Icons Placeholder */}
+            <div className="flex items-center gap-3 text-gray-500">
+              <span className="text-xs uppercase tracking-wider font-bold">Structural Excellence</span>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            <h4 className="text-xs md:text-lg font-semibold mb-2 md:mb-6">Quick Links</h4>
-            <ul className="space-y-1 md:space-y-3">
+          {/* Column 2: Quick Navigation */}
+          <div className="flex flex-col gap-4">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#D71920] border-l-2 border-[#D71920] pl-3">
+              Quick Links
+            </h4>
+            <ul className="flex flex-col gap-2.5">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <button
-                    onClick={() => scrollToSection(link.href)}
-                    className="text-[10px] md:text-base text-gray-300 hover:text-[#C9A46A] transition-colors duration-200"
+                    onClick={() => handleNavigation(link.href)}
+                    className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
                   >
                     {link.name}
                   </button>
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          {/* Stakeholders */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-          >
-            <h4 className="text-xs md:text-lg font-semibold mb-2 md:mb-6">Departments</h4>
-            <ul className="space-y-1 md:space-y-3">
-              {stakeholders.map((link) => (
+          {/* Column 3: Secondary Navigation & Services */}
+          <div className="flex flex-col gap-4">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#D71920] border-l-2 border-[#D71920] pl-3">
+              Our Process & Info
+            </h4>
+            <ul className="flex flex-col gap-2.5">
+              {secondaryLinks.map((link) => (
                 <li key={link.name}>
                   <button
-                    onClick={() => scrollToSection(link.href)}
-                    className="text-[10px] md:text-base text-gray-300 hover:text-[#C9A46A] transition-colors duration-200"
+                    onClick={() => handleNavigation(link.href)}
+                    className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
                   >
                     {link.name}
                   </button>
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          {/* Services */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="hidden md:block"
+          {/* Column 4: Contact Details */}
+          <div className="flex flex-col gap-4">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#D71920] border-l-2 border-[#D71920] pl-3">
+              Office Details
+            </h4>
+            <div className="flex flex-col gap-3 text-sm text-gray-400">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 text-[#D71920] shrink-0 mt-0.5" />
+                <span className="font-light">{brand.location}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="w-4 h-4 text-[#D71920] shrink-0" />
+                <span className="font-light">{brand.phone}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail className="w-4 h-4 text-[#D71920] shrink-0" />
+                <span className="font-light">{brand.email}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Clock className="w-4 h-4 text-[#D71920] shrink-0" />
+                <span className="font-light">{brand.hours}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Callout Section */}
+        <div className="border-t border-gray-900 pt-8 mt-8 pb-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3 text-left">
+            <div className="w-10 h-10 bg-white/5 flex items-center justify-center text-[#D71920]">
+              <HardHat className="w-5 h-5" />
+            </div>
+            <div>
+              <h5 className="text-sm font-bold text-white">Need structural value engineering?</h5>
+              <p className="text-xs text-gray-400 font-light">Get in touch with us to optimize your steel or concrete design.</p>
+            </div>
+          </div>
+          <button
+            onClick={() => handleNavigation('#contact')}
+            className="bg-[#D71920] hover:bg-[#be1218] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-colors shrink-0"
           >
-            <h4 className="text-lg font-semibold mb-6">Our Services</h4>
-            <ul className="space-y-3">
-              {services.map((service) => (
-                <li key={service}>
-                  <span className="text-gray-300 text-sm">{service}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+            GET A QUOTE
+          </button>
         </div>
 
-        {/* Callout */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-8 md:mt-14 p-5 md:p-7 bg-white/5 border border-[#C9A46A]/35 rounded-sm"
-        >
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="mb-3 md:mb-0">
-              <h4 className="text-sm md:text-xl font-bold mb-1 md:mb-2 text-white">Work With Us</h4>
-              <p className="text-[10px] md:text-base text-white/80">Contact us to discuss partnerships, hospitality, agriculture, real estate, mining, or export opportunities.</p>
-            </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => window.open(brand.phoneHref)}
-              className="bg-[#C9A46A] text-white border-[#C9A46A] hover:bg-[#C9A46A] hover:border-[#C9A46A] text-[10px] md:text-sm px-3 py-1.5 md:px-4 md:py-2 whitespace-nowrap flex-shrink-0"
-            >
-              <Phone className="w-3.5 h-3.5 md:w-5 md:h-5 mr-1.5 md:mr-2" />
-              Call Us
-            </Button>
+        {/* Bottom Bar: copyright and back to top */}
+        <div className="border-t border-gray-900 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+          <div>
+            © {new Date().getFullYear()} {brand.name}. All rights reserved.
           </div>
-        </motion.div>
-      </div>
-
-      {/* Bottom Footer */}
-      <div className="border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center space-x-4 mb-2 md:mb-0">
-              <p className="text-gray-400 text-[9px] md:text-sm">
-                © 2026 {brand.name}. All rights reserved.
-              </p>
-            </div>
-
-            <div className="flex items-center space-x-6">
-              {/* Social Links */}
-              <button
-                onClick={() => window.open('https://facebook.com/')}
-                className="text-gray-400 hover:text-[#C9A46A] transition-colors duration-200"
-              >
-                <Facebook className="w-5 h-5" />
-              </button>
-
-              {/* Back to Top */}
-              <button
-                onClick={scrollToTop}
-                className="flex items-center space-x-2 text-gray-400 hover:text-[#C9A46A] transition-colors duration-200"
-              >
-                <ArrowUp className="w-4 h-4" />
-                <span className="text-sm">Back to Top</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Legal Links */}
-          <div className="mt-2 md:mt-4 pt-2 md:pt-4 border-t border-gray-800">
-            <div className="flex flex-col md:flex-row items-center justify-between text-[9px] md:text-xs text-gray-500">
-              <div className="flex items-center space-x-4 mb-2 md:mb-0">
-                {legalLinks.map((link, idx) => (
-                  <React.Fragment key={link.name}>
-                    <button
-                      onClick={() => scrollToSection(link.href)}
-                      className="hover:text-[#C9A46A] transition-colors duration-200"
-                    >
-                      {link.name}
-                    </button>
-                    {idx !== legalLinks.length - 1 && <span>•</span>}
-                  </React.Fragment>
-                ))}
-              </div>
-              <div className="flex items-center space-x-2">
-                <span>Made with</span>
-                <Heart className="w-3 h-3 text-[#C9A46A]" />
-                <span>for long-term value</span>
-              </div>
-            </div>
-            
-            {/* Developer Credit */}
-            <div className="mt-4 md:mt-8 flex justify-center">
-              <a 
-                href="https://elevateadds.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="group relative px-2.5 py-1 md:px-4 md:py-2 overflow-hidden rounded-sm bg-[#1B1B1B] border border-[#C9A46A]/20 transition-all duration-300 hover:bg-[#2B2622] hover:shadow-[0_0_20px_rgba(210,180,140,0.28)]"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-[#E6D0B0] via-[#C9A46A] to-[#C9A46A] opacity-25 group-hover:opacity-100 transition-opacity duration-500 blur-lg" />
-                <span className="relative text-[9px] md:text-sm bg-gradient-to-r from-[#E6D0B0] via-[#C9A46A] to-[#C9A46A] bg-clip-text text-transparent font-bold tracking-wider group-hover:text-white transition-colors duration-300">
-                  Developed by Elevate Marketing & Advertising
-                </span>
-              </a>
-            </div>
-          </div>
+          <button
+            onClick={scrollToTop}
+            className="flex items-center gap-2 hover:text-white transition-colors"
+          >
+            <span>Back to Top</span>
+            <ArrowUp className="w-3.5 h-3.5" />
+          </button>
         </div>
+
       </div>
     </footer>
   )

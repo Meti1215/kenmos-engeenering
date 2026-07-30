@@ -1,123 +1,117 @@
 'use client'
 
-import React from 'react'
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { 
-  Globe, 
-  ShieldCheck, 
-  Scale, 
-  MapPin, 
-  Building2, 
-  CheckCircle,
-  TrendingUp
-} from 'lucide-react'
-import { brand, partnershipReasons, brandMedia } from '@/lib/brand'
-
-interface Reason {
-  id: string
-  title: string
-  icon: any
-  image: string
-  description: string
-  highlights: string[]
-}
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Folder, MapPin, Eye } from 'lucide-react'
+import { projects } from '@/lib/brand'
 
 const ProjectsShowcase = () => {
-  const icons = [TrendingUp, Globe, Building2, Scale, ShieldCheck, MapPin]
-  const images = [
-    brandMedia.ventures.grandPalace1,
-    brandMedia.ventures.distribution,
-    brandMedia.ventures.realEstate,
-    brandMedia.ventures.grandPalace2,
-    brandMedia.ventures.grandPalace3,
-    brandMedia.ventures.export,
-  ]
+  const [filter, setFilter] = useState('All')
 
-  const reasons: Reason[] = partnershipReasons.map((reason, index) => ({
-    id: reason.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-    title: reason.title,
-    icon: icons[index],
-    image: images[index],
-    description: reason.description,
-    highlights: [
-      reason.title,
-      brand.tagline,
-      'Founder-led long-term vision',
-      'Structured partnership opportunities',
-    ],
-  }))
+  const categories = ['All', 'Commercial', 'Institutional', 'Hospitality', 'Specialized']
+
+  const filteredProjects = filter === 'All' 
+    ? projects 
+    : projects.filter(p => p.category === filter)
 
   return (
-    <section id="projects" className="py-10 md:py-20 bg-gray-50">
+    <section id="projects" className="py-20 md:py-32 bg-[#F9FAFB] border-t border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85, y: 50 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-6 md:mb-16"
-        >
-          <h2 className="text-2xl md:text-5xl font-bold font-heading mb-3 md:mb-6 text-black">
-            Why Partner With <span className="text-black">{brand.shortName}</span>
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+          <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#D71920]">
+            Our Portfolio
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-heading text-black mt-2 leading-tight">
+            Featured Engineering Projects
           </h2>
-          <p className="text-xs md:text-xl text-gray-600 max-w-3xl mx-auto">
-            A founder-led Ethiopian business group shaped by practical market knowledge, diversified execution, and a long-term growth mindset.
-          </p>
-        </motion.div>
+        </div>
 
-        {/* Reasons Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 md:gap-8">
-          {reasons.map((reason, index) => (
-            <motion.div
-              key={reason.id}
-              initial={{ opacity: 0, scale: 0.8, y: 60 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: (index % 3) * 0.12, ease: [0.22, 1, 0.36, 1] }}
-              className="group bg-white rounded-sm md:rounded-sm shadow-md md:shadow-lg hover-lift overflow-hidden border border-gray-100"
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 mb-12">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setFilter(cat)}
+              className={`px-4 py-2 text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-200 border ${
+                filter === cat 
+                  ? 'bg-[#D71920] border-[#D71920] text-white shadow-sm' 
+                  : 'bg-white border-gray-200 text-gray-600 hover:border-[#D71920] hover:text-[#D71920]'
+              }`}
             >
-              {/* Image */}
-              <div className="relative h-24 md:h-52 overflow-hidden">
-                <Image
-                  src={reason.image}
-                  alt={reason.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  unoptimized
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                
-                <div className="absolute bottom-3 left-3 flex items-center gap-2">
-                  <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-sm flex items-center justify-center">
-                    <reason.icon className="w-4 h-4 text-white" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-2 md:p-5 lg:p-6">
-                <h3 className="text-[11px] md:text-xl font-bold text-gray-900 mb-1 md:mb-3 leading-tight">
-                  {reason.title}
-                </h3>
-
-                <p className="text-[9px] md:text-sm text-gray-600 leading-snug md:leading-relaxed mb-1 md:mb-4 line-clamp-3 md:line-clamp-none">
-                  {reason.description}
-                </p>
-
-                <div className="hidden md:block space-y-2">
-                  {reason.highlights.map((highlight, idx) => (
-                    <div key={idx} className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-[#C9A46A] flex-shrink-0 mt-0.5" />
-                      <span className="text-xs text-gray-700">{highlight}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+              {cat}
+            </button>
           ))}
         </div>
+
+        {/* Projects Grid */}
+        <motion.div 
+          layout 
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4 }}
+                className="group relative h-[360px] md:h-[420px] overflow-hidden bg-gray-900 border border-gray-100 shadow-md"
+              >
+                {/* Project Image */}
+                <div className="absolute inset-0 z-0">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-80"
+                  />
+                </div>
+
+                {/* Dark Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-[1] transition-opacity duration-300 group-hover:opacity-95"></div>
+
+                {/* Category Badge */}
+                <div className="absolute top-6 left-6 z-10 bg-white/90 backdrop-blur-sm text-black text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 shadow-sm">
+                  {project.category}
+                </div>
+
+                {/* Content Box */}
+                <div className="absolute bottom-0 left-0 right-0 p-8 z-10 text-white flex flex-col gap-3">
+                  <div className="flex items-center gap-2 text-[#D71920] text-xs font-bold uppercase tracking-wider">
+                    <Folder className="w-3.5 h-3.5" />
+                    <span>Kenmos Project Profile</span>
+                  </div>
+                  
+                  <h3 className="text-xl md:text-2xl font-black font-heading tracking-tight leading-tight group-hover:text-[#D71920] transition-colors">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-xs md:text-sm text-gray-300 font-light leading-relaxed line-clamp-3">
+                    {project.description}
+                  </p>
+
+                  <div className="flex items-center gap-1.5 text-gray-400 text-xs mt-1">
+                    <MapPin className="w-3.5 h-3.5 text-[#D71920]" />
+                    <span>Addis Ababa, Ethiopia</span>
+                  </div>
+                </div>
+
+                {/* Hover overlay icons */}
+                <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
+                  <div className="w-12 h-12 bg-[#D71920] text-white flex items-center justify-center shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                    <Eye className="w-5 h-5" />
+                  </div>
+                </div>
+
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
       </div>
     </section>
   )

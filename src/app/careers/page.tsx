@@ -5,61 +5,56 @@ import { motion } from 'framer-motion'
 import { Briefcase, Users, GraduationCap, ArrowRight } from 'lucide-react'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
-import { Button } from '@/components/ui/button'
 import { brand } from '@/lib/brand'
 
 export default function CareersPage() {
   const values = [
     {
-      title: 'Performance & Ownership',
-      description: 'A culture focused on disciplined execution, accountability, and long-term value creation.',
+      title: 'Precision & Excellence',
+      description: 'A structural modeling culture focused on analysis precision, standard code compliance, and structural integrity.',
       icon: Briefcase,
     },
     {
-      title: 'Teamwork',
-      description: 'We value collaboration across ventures, operating teams, and strategic partner relationships.',
+      title: 'Team Collaboration',
+      description: 'We value communication between our detailing team, consulting leads, general contractors, and site supervisors.',
       icon: Users,
     },
     {
-      title: 'Learning & Growth',
-      description: 'We support skills development through practical execution, new venture building, and market exposure.',
+      title: 'Continuous Learning',
+      description: 'We support career development through training on advanced modeling software, seismic design, and value engineering.',
       icon: GraduationCap,
     },
   ]
 
   const openings = [
-    { title: 'Business Development Manager – Export Ventures', location: 'Addis Ababa', type: 'Full-time' },
-    { title: 'Hospitality Operations Supervisor', location: 'Addis Ababa', type: 'Full-time' },
-    { title: 'Supply Chain & Distribution Coordinator', location: 'Ethiopia', type: 'Full-time' },
-    { title: 'Real Estate Project Support Officer', location: 'Addis Ababa', type: 'Full-time' },
-    { title: 'Agribusiness Sourcing Associate', location: 'Arba Minch / Addis Ababa', type: 'Full-time' },
-    { title: 'Finance & Administration Officer', location: 'Addis Ababa', type: 'Full-time' },
+    { title: 'Structural Steel Detailing Specialist', location: 'Addis Ababa', type: 'Full-time' },
+    { title: 'Junior Structural Designer', location: 'Addis Ababa', type: 'Full-time' },
+    { title: 'Site Inspection Engineer (Contract)', location: 'Addis Ababa', type: 'Project-based' },
   ]
 
   return (
-    <main className="relative min-h-screen bg-gray-50">
+    <main className="relative min-h-screen bg-white">
       <Navigation />
 
-      <section className="pt-navbar pb-8 md:pb-14 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <h1 className="text-2xl md:text-6xl font-bold text-black mb-3 md:mb-5 font-heading">
-              Careers at {brand.shortName}
-            </h1>
-            <p className="text-xs md:text-xl text-gray-600 max-w-4xl mx-auto">
-              Join a founder-led business group building ventures across distribution, hospitality, real estate, industrial operations, agriculture, and export.
-            </p>
-          </motion.div>
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-16 md:pb-24 px-4 sm:px-6 lg:px-8 bg-[#111112] text-white">
+        <div className="relative max-w-7xl mx-auto text-center flex flex-col items-center gap-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 text-[#D71920] text-xs font-bold uppercase tracking-wider">
+            <Briefcase className="w-4 h-4" />
+            Careers at Kenmos
+          </div>
+          <h1 className="text-4xl md:text-6xl font-black text-[#D71920] font-heading uppercase leading-none mt-2">
+            Join Our Team
+          </h1>
+          <p className="text-sm md:text-lg text-gray-300 max-w-3xl leading-relaxed mt-2 font-light">
+            Grow your engineering career with an established Ethiopian firm specializing in structural design and steel structures.
+          </p>
         </div>
       </section>
 
-      <section className="pb-10 md:pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-3 gap-2 md:gap-6">
+      {/* Company Values */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {values.map((item, idx) => (
             <motion.div
               key={item.title}
@@ -67,42 +62,55 @@ export default function CareersPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08 }}
-              className="bg-white rounded-sm md:rounded-sm border border-gray-100 shadow-sm p-3 md:p-8"
+              className="bg-white border border-gray-100 p-8 flex flex-col gap-4"
             >
-              <div className="inline-flex w-8 h-8 md:w-12 md:h-12 rounded-sm md:rounded-sm bg-[#C9A46A]/10 items-center justify-center">
-                <item.icon className="w-4 h-4 md:w-6 md:h-6 text-[#C9A46A]" />
+              <div className="w-12 h-12 bg-red-50 text-[#D71920] flex items-center justify-center">
+                <item.icon className="w-6 h-6" strokeWidth={1.5} />
               </div>
-              <h2 className="text-[11px] md:text-xl font-bold text-gray-900 mt-2 md:mt-4">{item.title}</h2>
-              <p className="text-[9px] md:text-base text-gray-600 mt-1 md:mt-2 leading-snug md:leading-relaxed">{item.description}</p>
+              <h2 className="text-xl font-bold text-black">{item.title}</h2>
+              <p className="text-sm text-gray-500 font-light leading-relaxed">{item.description}</p>
             </motion.div>
           ))}
         </div>
 
-        <div className="max-w-7xl mx-auto mt-4 md:mt-10 bg-white rounded-sm md:rounded-sm border border-gray-100 shadow-lg p-4 md:p-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-6">
+        {/* Job Openings */}
+        <div className="mt-20 bg-gray-50 border border-gray-100 p-8 md:p-12">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
-              <h2 className="text-base md:text-2xl font-bold text-gray-900">Open Roles</h2>
-              <p className="text-[10px] md:text-base text-gray-600 mt-1 md:mt-2">
-                These sample openings reflect the kinds of roles that support growth across the Ker & Co. portfolio.
+              <h2 className="text-2xl font-black font-heading text-black uppercase tracking-tight">Open Positions</h2>
+              <p className="text-xs text-gray-500 mt-2 font-light leading-relaxed">
+                If you are a passionate civil or structural engineering professional in Ethiopia, check our active roles.
               </p>
             </div>
-            <Button className="group" onClick={() => (window.location.href = '/#contact')}
+            <button
+              onClick={() => {
+                const el = document.getElementById('contact')
+                if (el) el.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="bg-[#D71920] hover:bg-[#be1218] text-white text-xs font-bold uppercase tracking-wider px-6 py-4 flex items-center gap-2"
             >
-              Apply / Send CV
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
+              Submit Resume / CV
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
 
-          <div className="mt-4 md:mt-8 grid grid-cols-2 gap-2 md:gap-5">
+          <div className="mt-12 grid md:grid-cols-3 gap-6">
             {openings.map((job) => (
-              <div key={job.title} className="rounded-sm md:rounded-sm bg-gray-50 border border-gray-100 p-3 md:p-6">
-                <div className="text-[10px] md:text-base font-semibold text-gray-900">{job.title}</div>
-                <div className="text-[9px] md:text-sm text-gray-600 mt-1 md:mt-2">{job.location} · {job.type}</div>
-                <div className="mt-5">
-                  <Button variant="outline" size="sm" onClick={() => (window.location.href = '/#contact')}
+              <div key={job.title} className="bg-white border border-gray-100 p-6 flex flex-col justify-between h-full hover:shadow-md transition-shadow">
+                <div>
+                  <h3 className="font-bold text-black text-base leading-tight">{job.title}</h3>
+                  <p className="text-xs text-gray-400 mt-2 font-light">{job.location} · {job.type}</p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-gray-100">
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById('contact')
+                      if (el) el.scrollIntoView({ behavior: 'smooth' })
+                    }}
+                    className="text-xs font-bold uppercase tracking-wider text-[#D71920]"
                   >
-                    Apply
-                  </Button>
+                    Apply Now
+                  </button>
                 </div>
               </div>
             ))}

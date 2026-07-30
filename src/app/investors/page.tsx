@@ -2,113 +2,62 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { BarChart3, FileText, ShieldCheck, Users, ArrowRight } from 'lucide-react'
+import { Landmark, FileCheck, HelpCircle } from 'lucide-react'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
-import { Button } from '@/components/ui/button'
-import { brand, investorHighlights } from '@/lib/brand'
+import { brand } from '@/lib/brand'
 
 export default function InvestorsPage() {
-  const highlights = investorHighlights.map((item, index) => ({
-    ...item,
-    icon: [BarChart3, ShieldCheck, Users][index],
-  }))
-
-  const downloads = [
+  const highlights = [
     {
-      title: 'Investor Overview (Sample)',
-      description: 'High-level snapshot of strategy, operations, and focus areas.',
-      tag: 'PDF',
+      title: 'Cost Control & Audits',
+      description: 'We prioritize design optimization, ensuring our steel detailing and concrete models remain highly cost-efficient.',
+      icon: Landmark,
     },
     {
-      title: 'Company Profile (Sample)',
-      description: 'Summary of the business model and key capabilities.',
-      tag: 'PDF',
+      title: 'Project Value Management',
+      description: 'Having handled projects with values in the hundreds of millions to over a billion Birr, we maintain absolute financial design accountability.',
+      icon: FileCheck,
     },
     {
-      title: 'Governance Snapshot (Sample)',
-      description: 'High-level overview of governance and leadership.',
-      tag: 'PDF',
+      title: 'Compliance & Standards',
+      description: 'Our designs strictly adhere to national building guidelines and international standards (ASCE, ACI, Eurocodes), minimizing structural risk.',
+      icon: HelpCircle,
     },
   ]
 
   return (
-    <main className="relative min-h-screen bg-gray-50">
+    <main className="relative min-h-screen bg-white">
       <Navigation />
 
-      <section className="pt-navbar pb-14 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-5 font-heading">
-              Investor <span className="text-gradient">Relations</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">
-              A dedicated resource for stakeholders seeking a clear view of strategy, stewardship, and long-term value creation across {brand.name}.
-            </p>
-          </motion.div>
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-16 md:pb-24 px-4 sm:px-6 lg:px-8 bg-[#111112] text-white">
+        <div className="relative max-w-7xl mx-auto text-center flex flex-col items-center gap-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 text-[#D71920] text-xs font-bold uppercase tracking-wider">
+            <Landmark className="w-4 h-4" />
+            Corporate Governance
+          </div>
+          <h1 className="text-4xl md:text-6xl font-black text-[#D71920] font-heading uppercase leading-none mt-2">
+            Value Management
+          </h1>
+          <p className="text-sm md:text-lg text-gray-300 max-w-3xl leading-relaxed mt-2 font-light">
+            Risk mitigation, material efficiency, and structural safety standards guiding Kenmos Engineering.
+          </p>
         </div>
       </section>
 
-      <section className="pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-6">
+      {/* Investor Highlights Grid */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8">
           {highlights.map((item, idx) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
-              className="bg-white rounded-sm border border-gray-100 shadow-sm p-8"
-            >
-              <div className="inline-flex w-12 h-12 rounded-sm bg-medical-blue/10 items-center justify-center">
-                <item.icon className="w-6 h-6 text-medical-blue" />
+            <div key={item.title} className="border border-gray-100 p-8 flex flex-col gap-4 bg-white hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-red-50 text-[#D71920] flex items-center justify-center">
+                <item.icon className="w-6 h-6" strokeWidth={1.5} />
               </div>
-              <h2 className="text-xl font-bold text-gray-900 mt-4">{item.title}</h2>
-              <p className="text-gray-600 mt-2 leading-relaxed">{item.description}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="max-w-7xl mx-auto mt-10 bg-white rounded-sm border border-gray-100 shadow-lg p-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900">Downloads</h2>
-              <p className="text-gray-600 mt-2">
-                Sample materials are provided as placeholders and can be replaced with official investor documents when ready.
-              </p>
+              <h3 className="text-xl font-bold text-black">{item.title}</h3>
+              <p className="text-sm text-gray-500 font-light leading-relaxed">{item.description}</p>
             </div>
-            <Button className="group" onClick={() => (window.location.href = '/#contact')}
-            >
-              Investor Contact
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-5 mt-8">
-            {downloads.map((d) => (
-              <div key={d.title} className="rounded-sm bg-gray-50 border border-gray-100 p-6">
-                <div className="flex items-center justify-between">
-                  <div className="font-semibold text-gray-900">{d.title}</div>
-                  <div className="text-xs font-semibold px-2 py-1 rounded-sm bg-white border border-gray-200 text-gray-600">
-                    {d.tag}
-                  </div>
-                </div>
-                <div className="text-sm text-gray-600 mt-2 leading-relaxed">{d.description}</div>
-                <div className="mt-5">
-                  <Button variant="outline" size="sm" onClick={() => window.alert('Sample download placeholder. Replace with real PDF when available.')}
-                  >
-                    <FileText className="w-4 h-4 mr-2" />
-                    View
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
       </section>
 

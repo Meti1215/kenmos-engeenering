@@ -37,7 +37,7 @@ export default function AdminLogin() {
             <Lock className="h-6 w-6 text-white" />
           </div>
           <h2 className="text-3xl font-bold text-gray-900">Admin Login</h2>
-          <p className="mt-2 text-gray-600">Sign in to manage Ker &amp; Co. website content</p>
+          <p className="mt-2 text-gray-600">Sign in to manage Kenmos Engineering website content</p>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
