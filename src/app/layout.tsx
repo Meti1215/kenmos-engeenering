@@ -26,16 +26,37 @@ export const metadata: Metadata = {
   authors: [{ name: brand.name }],
   robots: 'index, follow',
   metadataBase: new URL('http://localhost:3000'),
+  applicationName: brand.name,
+  creator: brand.name,
+  publisher: brand.name,
   openGraph: {
     title: `${brand.name} - ${brand.tagline}`,
     description: `Discover Kenmos Engineering, a premier Ethiopian structural engineering firm specializing in structural design and steel structures since 2009.`,
     type: 'website',
     locale: 'en_US',
+    siteName: brand.name,
+    url: 'http://localhost:3000',
+    images: [
+      {
+        url: '/images/hero_building.png',
+        width: 1200,
+        height: 630,
+        alt: `${brand.name} - Structural Engineering Ethiopia`
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${brand.name} - ${brand.tagline}`,
+    description: `Premier Ethiopian structural engineering firm specializing in structural design, steel structures, and value engineering since 2009.`,
+    images: ['/images/hero_building.png']
   },
   icons: {
-    icon: '/images/favicon.ico',
-    shortcut: '/images/favicon.ico',
-    apple: '/images/favicon.ico',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' }
+    ],
+    shortcut: '/favicon.svg',
+    apple: '/apple-touch-icon.svg',
   },
 }
 

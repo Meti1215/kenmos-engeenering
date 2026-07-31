@@ -100,11 +100,11 @@ function ArticlesTab() {
   const [activeView, setActiveView] = useState<'form' | 'published' | 'drafts'>('form')
 
   const categories = [
-    "Import & Export",
-    "Trade & Investment",
-    "Partnerships",
-    "Logistics",
-    "Market Updates",
+    "Structural Design",
+    "Steel Structures",
+    "Value Engineering",
+    "Construction Supervision",
+    "Case Studies",
     "Company Updates",
     "General News"
   ]
@@ -147,7 +147,7 @@ function ArticlesTab() {
     setTitle('')
     setExcerpt('')
     setContent('')
-    setCategory('Import & Export')
+    setCategory('Structural Design')
     setImageFile(null)
     setImagePreview(null)
     setEditingId(null)
@@ -248,7 +248,7 @@ function ArticlesTab() {
     setTitle(article.title || '')
     setExcerpt(article.excerpt || '')
     setContent(article.content || '')
-    setCategory(article.category || 'Import & Export')
+    setCategory(article.category || 'Structural Design')
     setExistingImageUrl(article.image_url || null)
     setImagePreview(article.image_url || null)
     setImageFile(null)
@@ -595,7 +595,7 @@ function ArticlesTab() {
 function GalleryTab() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [category, setCategory] = useState('Import & Export')
+  const [category, setCategory] = useState('Structural Design')
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
@@ -604,11 +604,11 @@ function GalleryTab() {
   const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([])
 
   const categories = [
-    "Import & Export",
-    "Logistics & Shipping",
-    "Trade & Investment",
+    "Structural Design",
+    "Steel Detailing",
+    "Construction Supervision",
     "Awards & Certificates",
-    "Team & Partnerships",
+    "Team & Engineering Culture",
     "Brand Assets",
     "Other"
   ]
@@ -669,7 +669,7 @@ function GalleryTab() {
       setSuccess(true)
       setTitle('')
       setDescription('')
-      setCategory('Import & Export')
+      setCategory('Structural Design')
       setImageFile(null)
       setImagePreview(null)
       fetchGalleryImages()
@@ -715,7 +715,7 @@ function GalleryTab() {
             onChange={(e) => setTitle(e.target.value)}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-sm focus:ring-2 focus:ring-[#C9A46A] focus:border-transparent outline-none"
-            placeholder="e.g., Gold Mining Site 2024"
+            placeholder="e.g., Stadium Grandstand Structural Report 2024"
           />
         </div>
 

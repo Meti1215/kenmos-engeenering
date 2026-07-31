@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#ffffff"/>
+  <g transform="translate(64,64) scale(0.75)">
+    <path d="M96 64 L96 576 L208 576 L208 368 L336 272 L336 368 L448 304 L448 64 Z" fill="#111111"/>
+    <path d="M96 64 L96 576 L208 576 L208 368 L336 272 L336 368 L448 304 L448 64 Z" fill="none" stroke="#D71920" stroke-width="20" stroke-linejoin="miter"/>
+    <path d="M96 64 L96 576 L208 576 L208 368 L336 272 L336 368 L448 304 L448 64 Z" fill="#D71920" opacity="0.12"/>
+  </g>
+  <text x="256" y="482" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="800" fill="#D71920" letter-spacing="4">KENMOS ENGINEERING</text>
+</svg>

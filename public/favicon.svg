@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="4" fill="#ffffff"/>
+  <g transform="translate(8,8) scale(0.75)">
+    <path d="M12 8 L12 72 L26 72 L26 46 L42 34 L42 46 L56 38 L56 8 Z" fill="#111111"/>
+    <path d="M12 8 L12 72 L26 72 L26 46 L42 34 L42 46 L56 38 L56 8 Z" fill="none" stroke="#D71920" stroke-width="2.5" stroke-linejoin="miter"/>
+    <path d="M12 8 L12 72 L26 72 L26 46 L42 34 L42 46 L56 38 L56 8 Z" fill="#D71920" opacity="0.12"/>
+  </g>
+  <text x="32" y="60" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="800" fill="#D71920" letter-spacing="0.5">KENMOS</text>
+</svg>

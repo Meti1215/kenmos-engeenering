@@ -105,8 +105,8 @@ const Navigation = () => {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 bg-white border-b border-gray-100',
-        scrolled ? 'shadow-md py-2 md:py-3' : 'py-3 md:py-5'
+        'fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 bg-white border-b border-gray-200',
+        scrolled ? 'shadow-lg py-3 md:py-4' : 'py-4 md:py-6'
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -118,14 +118,14 @@ const Navigation = () => {
           </div>
 
           {/* Navigation Links (Desktop) */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 type="button"
                 onClick={() => handleNavigation(item.href, item.id)}
                 className={cn(
-                  'relative text-xs xl:text-sm font-bold uppercase tracking-wider transition-colors py-2 text-gray-700 hover:text-[#D71920]',
+                  'relative text-xs xl:text-sm font-semibold uppercase tracking-wider transition-colors py-2 text-gray-700 hover:text-[#D71920]',
                   activeSection === item.id && 'text-[#D71920] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#D71920]'
                 )}
               >
@@ -139,9 +139,9 @@ const Navigation = () => {
             <button
               type="button"
               onClick={() => handleNavigation('#contact', 'contact')}
-              className="inline-flex items-center gap-2 bg-[#D71920] hover:bg-[#be1218] text-white text-xs font-bold uppercase tracking-wider px-5 py-3 transition-colors duration-200"
+              className="inline-flex items-center gap-2 bg-[#D71920] hover:bg-[#be1218] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-colors duration-200"
             >
-              Get a Quote
+              GET A QUOTE
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
@@ -169,16 +169,16 @@ const Navigation = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-white border-t border-gray-100 overflow-hidden"
+            className="lg:hidden bg-white border-t border-gray-200 overflow-hidden"
           >
-            <div className="px-4 py-6 space-y-3">
+            <div className="px-4 py-6 space-y-2">
               {navItems.map((item) => (
                 <button
                   key={item.name}
                   type="button"
                   onClick={() => handleNavigation(item.href, item.id)}
                   className={cn(
-                    'block w-full text-left py-2.5 px-4 text-sm font-bold uppercase tracking-wider text-gray-700 hover:bg-gray-50 hover:text-[#D71920] transition-colors',
+                    'block w-full text-left py-3 px-4 text-sm font-semibold uppercase tracking-wider text-gray-700 hover:bg-gray-50 hover:text-[#D71920] transition-colors',
                     activeSection === item.id && 'text-[#D71920] bg-red-50/50 border-l-4 border-[#D71920]'
                   )}
                 >
@@ -191,7 +191,7 @@ const Navigation = () => {
                   onClick={() => handleNavigation('#contact', 'contact')}
                   className="w-full inline-flex items-center justify-center gap-2 bg-[#D71920] hover:bg-[#be1218] text-white text-sm font-bold uppercase tracking-wider py-3 transition-colors shadow-sm"
                 >
-                  Get a Quote
+                  GET A QUOTE
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>

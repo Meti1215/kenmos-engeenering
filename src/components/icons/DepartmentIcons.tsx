@@ -124,7 +124,7 @@ export const CoalMiningIcon = ({ strokeWidth = 2, className, ...props }: IconPro
         className="opacity-80"
       />
 
-      {/* Small energy marker (bronze via currentColor fill) */}
+      {/* Small bronze detail marker via currentColor fill */}
       <path
         d="M20.1 3.6l.5.8.8.5-.8.5-.5.8-.5-.8-.8-.5.8-.5z"
         fill="currentColor"

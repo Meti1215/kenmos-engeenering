@@ -16,7 +16,7 @@ const Hero = () => {
   return (
     <section 
       id="home" 
-      className="relative min-h-[90vh] md:min-h-screen flex items-center justify-start overflow-hidden bg-black pt-20"
+      className="relative min-h-[95vh] md:min-h-screen flex items-center justify-start overflow-hidden bg-black"
     >
       {/* Background Image with Ken Burns effect */}
       <div className="absolute inset-0 z-0">
@@ -36,56 +36,56 @@ const Hero = () => {
       </div>
 
       {/* Dark overlay matching the design reference */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/35 z-[1]"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/30 z-[1]"></div>
 
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col justify-center py-12 md:py-24">
-        <div className="max-w-3xl">
+      <div className="relative z-10 w-full px-6 sm:px-8 lg:px-12 xl:px-16 max-w-7xl mx-auto flex flex-col justify-center py-16 md:py-24 lg:py-32">
+        <div className="max-w-2xl lg:max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="flex flex-col gap-6 md:gap-8"
+            className="flex flex-col gap-5 md:gap-7 lg:gap-8"
           >
             {/* Tagline tag */}
             <div className="flex items-center gap-3">
-              <span className="h-[2px] w-8 bg-[#D71920]" />
-              <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] font-bold text-white">
+              <span className="h-[2px] w-12 bg-[#D71920]" />
+              <span className="text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.3em] font-bold text-white">
                 STRUCTURAL EXCELLENCE. LASTING IMPACT.
               </span>
             </div>
 
             {/* High Impact Heading */}
-            <h1 className="text-[2.5rem] sm:text-5xl md:text-7xl lg:text-8xl font-black font-heading leading-[1.05] tracking-tight uppercase">
+            <h1 className="text-[2.75rem] sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black font-heading leading-[1.1] tracking-tight uppercase">
               <span className="block text-white">ENGINEERING</span>
-              <span className="block text-[#D71920] my-1">STRONGER</span>
+              <span className="block text-[#D71920] my-0.5 md:my-1">STRONGER</span>
               <span className="block text-white">FOUNDATIONS</span>
             </h1>
 
             {/* Subheading paragraph */}
-            <p className="text-sm sm:text-lg md:text-xl text-gray-300 font-light leading-relaxed max-w-2xl">
-              Kenmos Engineering delivers innovative, sustainable, and cost-optimized structural engineering solutions that shape the future.
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 font-light leading-relaxed max-w-xl lg:max-w-2xl">
+              Kenmos Engineering delivers innovative, sustainable and cost-optimized structural engineering solutions that shape the future.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 mt-2">
+            <div className="flex flex-wrap items-center gap-4 sm:gap-5 mt-2">
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => handleScroll('services')}
-                className="group inline-flex items-center gap-3 bg-[#D71920] hover:bg-[#be1218] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-4 transition-colors"
+                className="group inline-flex items-center gap-2 bg-[#D71920] hover:bg-[#be1218] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-7 sm:px-8 py-4 transition-colors"
               >
                 OUR SERVICES
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4" />
               </motion.button>
 
               <motion.button
-                whileHover={{ scale: 1.03, x: 5 }}
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => handleScroll('projects')}
-                className="group inline-flex items-center gap-3 text-white text-xs sm:text-sm font-bold uppercase tracking-wider py-4"
+                className="group inline-flex items-center gap-2 border-2 border-white text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-7 sm:px-8 py-4 hover:bg-white hover:text-black transition-colors"
               >
                 VIEW PROJECTS
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#D71920]" />
+                <ArrowRight className="w-4 h-4" />
               </motion.button>
             </div>
           </motion.div>
@@ -93,7 +93,7 @@ const Hero = () => {
       </div>
       
       {/* Scroll indicator overlay */}
-      <div className="hidden md:block absolute bottom-24 left-8 z-10 text-white/50 text-xs font-bold uppercase tracking-widest leading-none">
+      <div className="hidden md:block absolute bottom-32 left-12 z-10 text-white/40 text-xs font-bold uppercase tracking-widest leading-none">
         Kenmos Structural Engineering
       </div>
     </section>
