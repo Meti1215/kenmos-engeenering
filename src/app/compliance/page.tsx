@@ -3,9 +3,9 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { ShieldCheck, FileSearch, AlertTriangle, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
-import { Button } from '@/components/ui/button'
 
 export default function CompliancePage() {
   const areas = [
@@ -33,12 +33,12 @@ export default function CompliancePage() {
     <main className="relative min-h-screen bg-gray-50">
       <Navigation />
 
-      <section className="pt-navbar pb-8 md:pb-14 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="pt-32 pb-8 md:pb-14 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
             className="text-center"
           >
             <h1 className="text-2xl md:text-6xl font-bold text-gray-900 mb-3 md:mb-5 font-heading">
@@ -60,10 +60,10 @@ export default function CompliancePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08 }}
-              className="bg-white rounded-sm md:rounded-sm border border-gray-100 shadow-sm p-3 md:p-8"
+              className="bg-white border border-gray-100 shadow-sm p-3 md:p-8"
             >
-              <div className="inline-flex w-8 h-8 md:w-12 md:h-12 rounded-sm md:rounded-sm bg-teal-600/10 items-center justify-center">
-                <item.icon className="w-4 h-4 md:w-6 md:h-6 text-teal-600" />
+              <div className="inline-flex w-8 h-8 md:w-12 md:h-12 bg-[#D71920]/10 items-center justify-center">
+                <item.icon className="w-4 h-4 md:w-6 md:h-6 text-[#D71920]" />
               </div>
               <h2 className="text-[11px] md:text-xl font-bold text-gray-900 mt-2 md:mt-4">{item.title}</h2>
               <p className="text-[9px] md:text-base text-gray-600 mt-1 md:mt-2 leading-snug md:leading-relaxed">{item.description}</p>
@@ -71,17 +71,19 @@ export default function CompliancePage() {
           ))}
         </div>
 
-        <div className="max-w-7xl mx-auto mt-4 md:mt-10 bg-white rounded-sm md:rounded-sm border border-gray-100 shadow-lg p-4 md:p-8">
+        <div className="max-w-7xl mx-auto mt-4 md:mt-10 bg-white border border-gray-100 shadow-lg p-4 md:p-8">
           <h2 className="text-base md:text-2xl font-bold text-gray-900">Reporting & Inquiries</h2>
           <p className="text-[10px] md:text-base text-gray-600 mt-1 md:mt-2">
             For compliance-related questions or reporting, please contact our team.
           </p>
           <div className="mt-6">
-            <Button className="group" onClick={() => (window.location.href = '/#contact')}
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 bg-[#D71920] hover:bg-[#be1218] text-white text-xs font-bold uppercase tracking-wider px-5 py-3 transition-colors"
             >
               Contact Compliance
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

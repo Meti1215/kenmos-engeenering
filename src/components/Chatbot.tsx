@@ -204,11 +204,11 @@ const Chatbot = () => {
             initial={{ opacity: 0, scale: 0.8, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="mb-3 bg-white border border-gray-100 shadow-xl p-4 max-w-xs cursor-pointer rounded-none"
+            className="mb-3 bg-white border border-gray-100 shadow-xl p-4 max-w-[20rem] cursor-pointer rounded-none"
             onClick={handleOpenChat}
           >
-            <div className="flex justify-between items-start mb-1">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#D71920]">Kenmos Engineering</span>
+            <div className="flex justify-between items-start mb-1.5">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#D71920]">Kenmos Engineering</span>
               <button 
                 onClick={(e) => {
                   e.stopPropagation()
@@ -216,61 +216,137 @@ const Chatbot = () => {
                 }}
                 className="text-gray-400 hover:text-gray-600"
               >
-                <X className="w-3.5 h-3.5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
-            <p className="text-xs text-gray-600 font-light">
+            <p className="text-[13px] leading-relaxed text-gray-700 font-light">
               Hi! Need structural cost optimization advice? Ask me here.
             </p>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Main Chat Trigger Button */}
+      {/* Main Chat Trigger Button (+~15% size: 56px → 64px) */}
       <motion.button
         onClick={handleOpenChat}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="w-14 h-14 bg-[#D71920] text-white flex items-center justify-center shadow-2xl rounded-none relative focus:outline-none"
+        initial={{ scale: 0.6, y: 20, opacity: 0 }}
+        animate={{
+          scale: 1,
+          y: [0, -4, 0, -2, 0],
+          opacity: 1,
+          boxShadow: [
+            '0 25px 50px -12px rgba(215,25,32,0.15), 0 0 0 0 rgba(215,25,32,0)',
+            '0 25px 50px -12px rgba(215,25,32,0.25), 0 0 0 0 rgba(215,25,32,0)',
+            '0 25px 50px -12px rgba(215,25,32,0.4), 0 0 32px 6px rgba(215,25,32,0.35)',
+            '0 25px 50px -12px rgba(215,25,32,0.25), 0 0 0 0 rgba(215,25,32,0)',
+            '0 25px 50px -12px rgba(215,25,32,0.15), 0 0 0 0 rgba(215,25,32,0)',
+          ],
+        }}
+        transition={{
+          initial: { duration: 0 },
+          scale: {
+            type: 'spring',
+            stiffness: 260,
+            damping: 16,
+            mass: 0.8,
+          },
+          y: {
+            duration: 4.5,
+            repeat: Infinity,
+            repeatType: 'loop',
+            ease: 'easeInOut',
+          },
+          opacity: {
+            delay: 0.05,
+            duration: 0.45,
+            ease: 'easeOut',
+          },
+          boxShadow: {
+            duration: 5,
+            repeat: Infinity,
+            repeatType: 'loop',
+            ease: 'easeInOut',
+          },
+        }}
+        whileHover={{
+          scale: 1.05,
+          boxShadow: '0 30px 60px -15px rgba(215,25,32,0.5), 0 0 48px 10px rgba(215,25,32,0.45)',
+          transition: {
+            scale: { duration: 0.22, ease: 'easeInOut' },
+            boxShadow: { duration: 0.22, ease: 'easeInOut' },
+          },
+        }}
+        whileTap={{ scale: 0.93 }}
+        className="w-16 h-16 bg-[#D71920] text-white flex items-center justify-center shadow-2xl rounded-none relative focus:outline-none will-change-transform"
       >
-        <MessageSquare className="w-6 h-6" />
+        {/* Animated glow ring behind the button */}
+        <motion.span
+          aria-hidden
+          className="absolute inset-0 rounded-none pointer-events-none"
+          animate={{
+            boxShadow: [
+              '0 0 0 0 rgba(215,25,32,0)',
+              '0 0 0 0 rgba(215,25,32,0)',
+              '0 0 0 6px rgba(215,25,32,0.18)',
+              '0 0 0 10px rgba(215,25,32,0)',
+              '0 0 0 0 rgba(215,25,32,0)',
+            ],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            repeatType: 'loop',
+            ease: 'easeInOut',
+          }}
+        />
+        <motion.span
+          aria-hidden
+          className="absolute -inset-1 pointer-events-none"
+          animate={{ opacity: [0, 0.08, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+          style={{
+            background: 'radial-gradient(circle at center, rgba(215,25,32,0.35) 0%, rgba(215,25,32,0) 70%)',
+            filter: 'blur(6px)',
+          }}
+        />
+        <MessageSquare className="w-7 h-7 relative z-10" />
       </motion.button>
 
-      {/* Chat Window Panel */}
+      {/* Chat Window Panel (+~18% size; mobile capped so it does not overflow) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="absolute bottom-16 right-0 w-[320px] sm:w-[360px] h-[480px] bg-white border border-gray-100 shadow-2xl flex flex-col z-50 rounded-none overflow-hidden"
+            className="absolute bottom-[72px] right-0 w-[calc(100vw-3rem)] sm:w-[340px] md:w-[420px] max-h-[80vh] sm:h-[560px] bg-white border border-gray-100 shadow-2xl flex flex-col z-50 rounded-none overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-[#111112] text-white p-4 flex justify-between items-center border-b border-gray-900">
-              <div className="flex items-center gap-2.5">
-                <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div>
+            <div className="bg-[#111112] text-white p-4 md:p-5 flex justify-between items-center border-b border-gray-900">
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                 <div>
-                  <h4 className="text-sm font-bold">Kenmos Assistant</h4>
-                  <p className="text-[9px] text-gray-400 uppercase tracking-widest leading-none mt-0.5">Structural Consultant</p>
+                  <h4 className="text-[15px] font-bold leading-tight">Kenmos Assistant</h4>
+                  <p className="text-[10px] text-gray-400 uppercase tracking-widest leading-none mt-1">Structural Consultant</p>
                 </div>
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
                 className="text-gray-400 hover:text-white"
               >
-                <X className="w-5 h-5" />
+                <X className="w-[22px] h-[22px]" />
               </button>
             </div>
 
             {/* Message History area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50">
+            <div className="flex-1 overflow-y-auto p-4 md:p-5 space-y-4 md:space-y-5 bg-gray-50/50">
               {messages.map((msg) => (
                 <div 
                   key={msg.id}
                   className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div 
-                    className={`max-w-[80%] p-3 text-xs leading-relaxed ${
+                    className={`max-w-[82%] p-3 md:p-3.5 text-[13px] md:text-[14px] leading-relaxed ${
                       msg.sender === 'user' 
                         ? 'bg-[#D71920] text-white rounded-none' 
                         : 'bg-white border border-gray-100 text-gray-800 rounded-none shadow-sm'
@@ -284,20 +360,20 @@ const Chatbot = () => {
             </div>
 
             {/* Input Form Area */}
-            <div className="p-3 border-t border-gray-100 flex items-center gap-2 bg-white">
+            <div className="p-3 md:p-4 border-t border-gray-100 flex items-center gap-2 md:gap-3 bg-white">
               <input
                 type="text"
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyDown={handleKeyPress}
-                className="flex-1 px-3 py-2 text-xs border border-gray-200 focus:outline-none focus:border-[#D71920]"
+                className="flex-1 px-3 md:px-4 py-2.5 md:py-3 text-[13px] md:text-[14px] border border-gray-200 focus:outline-none focus:border-[#D71920]"
                 placeholder="Ask about value engineering, steel, hours..."
               />
               <button
                 onClick={() => handleSend()}
-                className="p-2 bg-[#D71920] text-white hover:bg-[#be1218] transition-colors"
+                className="p-2.5 md:p-3 bg-[#D71920] text-white hover:bg-[#be1218] transition-colors"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-4 h-4 md:w-[18px] md:h-[18px]" />
               </button>
             </div>
 

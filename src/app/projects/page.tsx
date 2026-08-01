@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Building2, HardHat } from 'lucide-react'
+import { ArrowRight, Building2 } from 'lucide-react'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import { projects } from '@/lib/brand'
@@ -71,17 +71,13 @@ export default function ProjectsPage() {
 
               {/* Card Footer Action */}
               <div className="p-8 pt-0 flex justify-start">
-                <button
-                  type="button"
-                  onClick={() => {
-                    const el = document.getElementById('contact')
-                    if (el) el.scrollIntoView({ behavior: 'smooth' })
-                  }}
+                <a
+                  href="/contact"
                   className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D71920] hover:text-red-700 transition-colors"
                 >
                   Discuss Project
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </a>
               </div>
 
             </motion.div>

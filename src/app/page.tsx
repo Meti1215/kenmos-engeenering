@@ -18,13 +18,6 @@ import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 
 export default function Home() {
-  const handleScroll = (id: string) => {
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
     <main className="relative bg-white min-h-screen">
       {/* Sticky Header */}
@@ -78,15 +71,15 @@ export default function Home() {
             Discuss your building blueprints, steel truss connections, or value engineering parameters with our lead structural engineer.
           </p>
           <div className="pt-4">
-            <motion.button
+            <motion.a
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
-              onClick={() => handleScroll('contact')}
+              href="/contact"
               className="inline-flex items-center gap-3 bg-white text-[#D71920] hover:bg-gray-100 text-xs sm:text-sm font-bold uppercase tracking-wider px-8 py-4 transition-colors"
             >
               GET A FREE QUOTE
               <ArrowRight className="w-4 h-4" />
-            </motion.button>
+            </motion.a>
           </div>
         </div>
       </section>

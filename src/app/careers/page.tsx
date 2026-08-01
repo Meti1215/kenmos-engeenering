@@ -82,16 +82,13 @@ export default function CareersPage() {
                 If you are a passionate civil or structural engineering professional in Ethiopia, check our active roles.
               </p>
             </div>
-            <button
-              onClick={() => {
-                const el = document.getElementById('contact')
-                if (el) el.scrollIntoView({ behavior: 'smooth' })
-              }}
+            <a
+              href="/contact"
               className="bg-[#D71920] hover:bg-[#be1218] text-white text-xs font-bold uppercase tracking-wider px-6 py-4 flex items-center gap-2"
             >
               Submit Resume / CV
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
           </div>
 
           <div className="mt-12 grid md:grid-cols-3 gap-6">
@@ -102,15 +99,12 @@ export default function CareersPage() {
                   <p className="text-xs text-gray-400 mt-2 font-light">{job.location} · {job.type}</p>
                 </div>
                 <div className="mt-6 pt-4 border-t border-gray-100">
-                  <button
-                    onClick={() => {
-                      const el = document.getElementById('contact')
-                      if (el) el.scrollIntoView({ behavior: 'smooth' })
-                    }}
+                  <a
+                    href="/contact"
                     className="text-xs font-bold uppercase tracking-wider text-[#D71920]"
                   >
                     Apply Now
-                  </button>
+                  </a>
                 </div>
               </div>
             ))}

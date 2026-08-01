@@ -15,13 +15,6 @@ const iconMap = {
 }
 
 const Services = () => {
-  const handleScroll = (id: string) => {
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   const containerVariants = {
     hidden: {},
     visible: {
@@ -89,15 +82,15 @@ const Services = () => {
 
         {/* Bottom Call to Action */}
         <div className="mt-16 text-center">
-          <motion.button
+          <motion.a
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => handleScroll('contact')}
+            href="/services"
             className="group inline-flex items-center gap-3 bg-[#D71920] hover:bg-[#be1218] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-8 py-4 transition-colors"
           >
             VIEW ALL SERVICES
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </motion.button>
+          </motion.a>
         </div>
 
       </div>

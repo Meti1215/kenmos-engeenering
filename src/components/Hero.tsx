@@ -3,16 +3,10 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 import { brand } from '@/lib/brand'
 
 const Hero = () => {
-  const handleScroll = (id: string) => {
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
     <section 
       id="home" 
@@ -41,9 +35,9 @@ const Hero = () => {
       <div className="relative z-10 w-full px-6 sm:px-8 lg:px-12 xl:px-16 max-w-7xl mx-auto flex flex-col justify-center py-16 md:py-24 lg:py-32">
         <div className="max-w-2xl lg:max-w-3xl">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
             className="flex flex-col gap-5 md:gap-7 lg:gap-8"
           >
             {/* Tagline tag */}
@@ -68,25 +62,33 @@ const Hero = () => {
 
             {/* CTAs */}
             <div className="flex flex-wrap items-center gap-4 sm:gap-5 mt-2">
-              <motion.button
+              <motion.div
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => handleScroll('services')}
-                className="group inline-flex items-center gap-2 bg-[#D71920] hover:bg-[#be1218] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-7 sm:px-8 py-4 transition-colors"
               >
-                OUR SERVICES
-                <ArrowRight className="w-4 h-4" />
-              </motion.button>
+                <Link
+                  href="/services"
+                  prefetch={true}
+                  className="group inline-flex items-center gap-2 bg-[#D71920] hover:bg-[#be1218] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-7 sm:px-8 py-4 transition-colors"
+                >
+                  OUR SERVICES
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
 
-              <motion.button
+              <motion.div
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => handleScroll('projects')}
-                className="group inline-flex items-center gap-2 border-2 border-white text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-7 sm:px-8 py-4 hover:bg-white hover:text-black transition-colors"
               >
-                VIEW PROJECTS
-                <ArrowRight className="w-4 h-4" />
-              </motion.button>
+                <Link
+                  href="/projects"
+                  prefetch={true}
+                  className="group inline-flex items-center gap-2 border-2 border-white text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-7 sm:px-8 py-4 hover:bg-white hover:text-black transition-colors"
+                >
+                  VIEW PROJECTS
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         </div>

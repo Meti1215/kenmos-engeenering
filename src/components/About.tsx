@@ -6,13 +6,6 @@ import { ArrowRight } from 'lucide-react'
 import { aboutContent } from '@/lib/brand'
 
 const About = () => {
-  const handleScroll = (id: string) => {
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
     <section id="about" className="py-20 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,15 +65,15 @@ const About = () => {
             </div>
 
             <div className="pt-2">
-              <motion.button
+              <motion.a
                 whileHover={{ scale: 1.03, x: 5 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => handleScroll('contact')}
+                href="/about"
                 className="group inline-flex items-center gap-3 border border-[#D71920] text-[#D71920] hover:bg-red-50 text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-4 transition-colors"
               >
                 MORE ABOUT US
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+              </motion.a>
             </div>
           </div>
 

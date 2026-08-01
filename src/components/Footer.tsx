@@ -1,23 +1,23 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
 import { Phone, Mail, MapPin, Clock, ArrowUp, HardHat } from 'lucide-react'
+import Link from 'next/link'
 import { brand } from '@/lib/brand'
 
 const Footer = () => {
   const quickLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About Us', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Industries', href: '#industries' },
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Services', href: '/services' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Industries', href: '/industries' },
   ]
 
   const secondaryLinks = [
-    { name: 'Our Process', href: '#process' },
-    { name: 'Careers', href: '#careers' },
-    { name: 'Contact Us', href: '#contact' },
+    { name: 'Our Process', href: '/process' },
+    { name: 'Careers', href: '/careers' },
+    { name: 'Contact Us', href: '/contact' },
   ]
 
   const footerServices = [
@@ -31,15 +31,6 @@ const Footer = () => {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const handleNavigation = (href: string) => {
-    if (href.startsWith('#')) {
-      const element = document.querySelector(href)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
-    }
   }
 
   // Custom Structural SVG Logo
@@ -69,7 +60,9 @@ const Footer = () => {
           
           {/* Column 1: Brand Info */}
           <div className="flex flex-col gap-6">
-            <Logo />
+            <Link href="/" prefetch={true}>
+              <Logo />
+            </Link>
             <p className="text-sm text-gray-400 leading-relaxed font-light">
               Kenmos Structural Engineering delivers innovative, safe, and cost-optimized structural designs and supervision in Ethiopia since 2009.
             </p>
@@ -87,12 +80,13 @@ const Footer = () => {
             <ul className="flex flex-col gap-2.5">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <button
-                    onClick={() => handleNavigation(link.href)}
+                  <Link
+                    href={link.href}
+                    prefetch={true}
                     className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
                   >
                     {link.name}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -106,12 +100,13 @@ const Footer = () => {
             <ul className="flex flex-col gap-2.5">
               {secondaryLinks.map((link) => (
                 <li key={link.name}>
-                  <button
-                    onClick={() => handleNavigation(link.href)}
+                  <Link
+                    href={link.href}
+                    prefetch={true}
                     className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
                   >
                     {link.name}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -129,11 +124,11 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-[#D71920] shrink-0" />
-                <span className="font-light">{brand.phone}</span>
+                <a href={brand.phoneHref} className="font-light hover:text-white transition-colors">{brand.phone}</a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[#D71920] shrink-0" />
-                <span className="font-light">{brand.email}</span>
+                <a href={`mailto:${brand.email}`} className="font-light hover:text-white transition-colors">{brand.email}</a>
               </div>
               <div className="flex items-center gap-3">
                 <Clock className="w-4 h-4 text-[#D71920] shrink-0" />
@@ -155,22 +150,48 @@ const Footer = () => {
               <p className="text-xs text-gray-400 font-light">Get in touch with us to optimize your steel or concrete design.</p>
             </div>
           </div>
-          <button
-            onClick={() => handleNavigation('#contact')}
+          <Link
+            href="/contact"
+            prefetch={true}
             className="bg-[#D71920] hover:bg-[#be1218] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-colors shrink-0"
           >
             GET A QUOTE
-          </button>
+          </Link>
         </div>
 
-        {/* Bottom Bar: copyright and back to top */}
-        <div className="border-t border-gray-900 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-          <div>
-            © {new Date().getFullYear()} {brand.name}. All rights reserved.
+        {/* Bottom Bar: copyright, legal links, back to top */}
+        <div className="border-t border-gray-900 pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-gray-500">
+          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
+            <div>
+              © {new Date().getFullYear()} {brand.name}. All rights reserved.
+            </div>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/privacy"
+                prefetch={true}
+                className="hover:text-white transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/terms"
+                prefetch={true}
+                className="hover:text-white transition-colors"
+              >
+                Terms of Use
+              </Link>
+              <Link
+                href="/disclaimer"
+                prefetch={true}
+                className="hover:text-white transition-colors"
+              >
+                Disclaimer
+              </Link>
+            </div>
           </div>
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 hover:text-white transition-colors"
+            className="flex items-center gap-2 hover:text-white transition-colors shrink-0"
           >
             <span>Back to Top</span>
             <ArrowUp className="w-3.5 h-3.5" />
