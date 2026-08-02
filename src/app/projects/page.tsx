@@ -47,15 +47,15 @@ export default function ProjectsPage() {
                   <img
                     src={p.image}
                     alt={p.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  
-                  <div className="absolute bottom-6 left-6 text-white">
-                    <span className="text-[10px] font-bold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-2.5 py-1 text-white border border-white/20">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-transparent" />
+
+                  <div className="absolute bottom-6 left-6 right-6 text-white z-10">
+                    <span className="inline-flex items-center rounded-none bg-[#D71920]/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.24em] text-white shadow-lg">
                       {p.category}
                     </span>
-                    <h2 className="text-2xl font-black font-heading mt-3 uppercase tracking-tight leading-tight">
+                    <h2 className="mt-3 max-w-xl text-2xl font-black font-heading uppercase tracking-tight leading-tight text-white drop-shadow-[0_3px_10px_rgba(0,0,0,0.85)]">
                       {p.title}
                     </h2>
                   </div>

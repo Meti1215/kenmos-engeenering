@@ -179,6 +179,54 @@ export const projects = [
       'Lead Consultant: Mesfin Architects\nStructural: Kenmos Engineering',
     image: '/images/project_eliyana.jpg',
   },
+  {
+  id: 'dh-geda-tower',
+  title: 'DH Geda Tower',
+  category: 'Commercial',
+  description:
+    'Lead Consultant: Mesfin Architects\nStructural: Kenmos Engineering',
+  image: '/images/project_dh_geda.jpg',
+},
+{
+  id: 'lex-plaza',
+  title: 'Lex Plaza',
+  category: 'Commercial',
+  description:
+    'Lead Consultant: Mesfin Architects\nStructural: Kenmos Engineering',
+  image: '/images/project_lex_plaza.jpg',
+},
+{
+  id: 'nigist-tower',
+  title: 'Nigist Tower',
+  category: 'Commercial',
+  description:
+    'Lead Consultant: Fasil Georgis\nStructural: Kenmos Engineering',
+  image: '/images/project_nigist_tower.jpg',
+},
+{
+  id: 'medhanialem-mall',
+  title: 'Medhanialem Mall',
+  category: 'Commercial',
+  description:
+    'Lead Consultant: Mesfin Architects\nStructural: Kenmos Engineering',
+  image: '/images/project_medhanialem_mall.jpg',
+},
+{
+  id: 'capital-hotel',
+  title: 'Capital Hotel',
+  category: 'Hospitality',
+  description:
+    'Lead Consultant: Mesfin Architects\nStructural: Kenmos Engineering',
+  image: '/images/project_capital_hotel.jpg',
+},
+{
+  id: 'athlet-birhane-adere-mall',
+  title: 'Athlet Birhane Adere Mall',
+  category: 'Commercial',
+  description:
+    'Lead Consultant: Mesfin Architects\nStructural: Kenmos Engineering',
+  image: '/images/project_athlet_birhane_adere.jpg',
+},
 ] 
 export const processSteps = [
   {
