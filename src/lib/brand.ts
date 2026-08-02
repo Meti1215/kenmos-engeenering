@@ -140,96 +140,112 @@ export const industries = [
 
 export const projects = [
   {
-    id: 'zemen-bank',
-    title: 'Zemen Bank Head Office',
-    category: 'Commercial',
-    description: 'Provided specialized structural review and design coordination assistance for the landmark high-rise headquarters in Addis Ababa.',
-    image: brandMedia.projects.zemenBank,
-  },
-  {
-    id: 'stadiums',
-    title: 'University Stadiums (Jimma & Haramaya)',
+    id: 'parliament-building',
+    title: 'Parliament Building',
     category: 'Institutional',
-    description: 'Full structural analysis and detailing for large-capacity concrete grandstands and structural steel roof arches.',
-    image: brandMedia.projects.stadium,
+    description:
+      'Owner: House of People’s Representatives\nLead Consultant: Addis Mebratu Consult + 5-7\nStatus: Under Preliminary Design',
+    image: '/images/project_parliament.jpg',
   },
   {
-    id: 'et302-memorial',
-    title: 'ET-302 Memorial Project',
-    category: 'Specialized',
-    description: 'Structural engineering design for the commemorative memorial monument in Ethiopia, prioritizing geometric precision.',
-    image: brandMedia.projects.memorial,
+    id: 'ethiopian-air-force-sport-center',
+    title: 'Ethiopian Air Force Sport Center',
+    category: 'Institutional',
+    description:
+      'Structural engineering services provided by Kenmos Engineering for the Ethiopian Air Force Sport Center.',
+    image: '/images/project_airforce.jpg',
   },
   {
-    id: 'awasa-hilton',
-    title: 'Awasa Hilton Hotel',
+    id: 'enat-building',
+    title: 'Enat Building (Office Building)',
+    category: 'Commercial',
+    description:
+      'Architect: Million Samuel\nStructural: Kenmos Engineering\nStatus: Completed',
+    image: '/images/project_enat.jpg',
+  },
+  {
+    id: 'ellelie-hotel',
+    title: 'Ellelie Hotel',
     category: 'Hospitality',
-    description: 'Seismic and structural design for the premium lakeside resort and hospitality suites in Awasa, Ethiopia.',
-    image: brandMedia.projects.hilton,
+    description:
+      'Lead Consultant: Tilahun Bekele\nStructural: Kenmos Engineering',
+    image: '/images/project_ellelie.jpg',
   },
-] as const
-
+  {
+    id: 'eliyana-mall-hotel',
+    title: 'Eliyana Mall & Hotel',
+    category: 'Hospitality',
+    description:
+      'Lead Consultant: Mesfin Architects\nStructural: Kenmos Engineering',
+    image: '/images/project_eliyana.jpg',
+  },
+] 
 export const processSteps = [
   {
     step: '01',
     title: 'Discovery & Consultation',
-    description: 'We meet with clients and architects to define the structural design requirements, budget, constraints, and project timeline.',
+    description:
+      'We meet with clients and architects to define project requirements, budget, constraints, and timeline.',
   },
   {
     step: '02',
     title: 'Structural Analysis & Design',
-    description: 'Using advanced engineering software, we model structures and run analysis for loads, wind, and seismic activities.',
+    description:
+      'We use advanced engineering software to analyze and design safe structural systems.',
   },
   {
     step: '03',
-    title: 'Value Engineering & BOQ',
-    description: 'We optimize the concrete grades and steel detailing to minimize material costs while maintaining maximum safety margins.',
+    title: 'Value Engineering',
+    description:
+      'We optimize materials and costs while maintaining safety and quality.',
   },
   {
     step: '04',
     title: 'Construction Supervision',
-    description: 'Our engineers make regular site inspections to verify concrete casting, reinforcing bar layouts, and steel welds.',
+    description:
+      'Our engineers monitor construction quality and ensure compliance with the design.',
   },
-] as const
-
-export const testimonials = [
-  {
-    quote: 'Kenmos Engineering proved to be an invaluable partner on our high-rise project. Their value engineering saved us over 12% in steel material costs without compromising design integrity.',
-    name: 'Yonas Abebe',
-    role: 'Project Director, Mixed-Use Real Estate',
-    rating: 5,
-  },
-  {
-    quote: 'Their detail drawings for our steel structural trusses were exceptionally clear. This enabled the fabrication shop to execute welds with zero defects and speed up the erection on site.',
-    name: 'Tamrat Hailu',
-    role: 'Lead Project Contractor, Steel Warehouses',
-    rating: 5,
-  },
-  {
-    quote: 'For over a decade, Kenmos has provided us with consistent, safe structural designs. They respond quickly to site variations and are thorough in structural safety checks.',
-    name: 'Dr. Semeneh Kidane',
-    role: 'Consulting Architect, Institutional Buildings',
-    rating: 5,
-  },
-] as const
-
+] as const 
 export const teamMembers = [
   {
     name: 'Kenmos Tesfaye',
     role: 'Founder & General Manager',
-    bio: 'Leads the structural consultancy team with over 20 years of experience, specialized in structural design and steel structures in Ethiopia.',
+    bio: 'Leads the structural consultancy team with over 20 years of experience in structural design and supervision.',
     image: '/images/team_kenmos.png',
   },
   {
-    name: 'Dawit Mekonnen',
-    role: 'Senior Structural Engineer',
-    bio: '12+ years of experience in finite element analysis, concrete structures, and dynamic wind/seismic analysis for high-rise buildings.',
-    image: '/images/team_dawit.png',
+    name: 'Senior Structural Engineer',
+    role: 'Structural Engineer',
+    bio: 'Experienced in structural analysis, design, and engineering solutions.',
+    image: '/images/team_engineer.png',
   },
   {
-    name: 'Fikru Wolde',
-    role: 'Lead Steel Detailer & Designer',
-    bio: 'Specialist in steel connection detailing, industrial trusses, and structural drafting with extreme precision and standards.',
-    image: '/images/team_fikru.png',
+    name: 'CAD Technician Team',
+    role: 'CAD Technicians',
+    bio: 'Specialized in technical drawings and structural documentation.',
+    image: '/images/team_cad.png',
+  },
+] as const 
+export const testimonials = [
+  {
+    quote:
+      'Kenmos Engineering delivered excellent structural solutions with high quality and professionalism.',
+    name: 'Project Client',
+    role: 'Building Developer',
+    rating: 5,
+  },
+  {
+    quote:
+      'Their engineering team provided reliable designs and effective project support.',
+    name: 'Architect Partner',
+    role: 'Design Consultant',
+    rating: 5,
+  },
+  {
+    quote:
+      'Kenmos demonstrated strong technical knowledge and commitment to safety.',
+    name: 'Construction Partner',
+    role: 'Contractor',
+    rating: 5,
   },
 ] as const

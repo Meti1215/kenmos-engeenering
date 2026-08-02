@@ -9,7 +9,6 @@ import StatsBar from '@/components/StatsBar'
 import About from '@/components/About'
 import Services from '@/components/ServicesCondensed'
 import Industries from '@/components/Industries'
-import ProjectsShowcase from '@/components/ProjectsShowcase'
 import WhyChooseUs from '@/components/WhyChooseUs'
 import Process from '@/components/Process'
 import Team from '@/components/Team'
@@ -38,8 +37,7 @@ export default function Home() {
       {/* Industries Sectors Grid Section */}
       <Industries />
       
-      {/* Projects Portfolio Grid Section */}
-      <ProjectsShowcase />
+
       
       {/* Why Choose Us Section */}
       <WhyChooseUs />
